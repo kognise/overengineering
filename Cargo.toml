@@ -1,0 +1,13 @@
+[package]
+name = "overengineering"
+version = "0.1.0"
+authors = ["Kognise <hi@kognise.dev>"]
+edition = "2018"
+
+[dependencies]
+rocket = "0.5.0-rc.1"
+serde = "1.0.133"
+serde_yaml = "0.8.23"
+lazy_static = "1.4.0"
+minify-html-onepass = { version = "0.8.0", features = ["js-esbuild"] }
+rand = "0.8.4"

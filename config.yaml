@@ -1,0 +1,15 @@
+sites:
+  - name: kognise
+    url: https://kognise.dev/
+    colors:
+      border: '#ced4da'
+      text: '#000000'
+      links: '#6741d9'
+    stylesheets:
+      - https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&display=swap
+    font_stack: '"IBM Plex Mono", monospace'
+
+default_colors:
+  border: '#4a4a4a'
+  text: '#000000'
+  links: '#0000ff'
