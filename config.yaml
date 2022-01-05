@@ -8,6 +8,13 @@ sites:
     stylesheets:
       - https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&display=swap
     font_stack: '"IBM Plex Mono", monospace'
+- name: arcade
+  url: https://arcade.srht.site
+  colors:
+    border: '#268bd2'
+    text: '#002b36'
+    links: '#d33682'
+  font_stack: 'serif'
 
 default_colors:
   border: '#4a4a4a'
