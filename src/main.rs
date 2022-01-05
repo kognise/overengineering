@@ -101,12 +101,12 @@ fn index() -> Html<String> {
                     <h2>criteria</h2>
                     <ul>
                         <li>this is a webring containing personal sites only.</li>
-                        <li>sites must list at least 3 things the owner made or majorly contributed to.</li>
+                        <li>sites must reference at least 3 things the owner created. the majority of the site content should be written and layed out by the site's creator(s).</li>
                         <li>no illegal, nsfw, or gory content is allowed. duh.</li>
                         <li>members must embed the webring widget on the main page of their site.</li>
                         <li>don't be evil, unless you really have to.</li>
                     </ul>
-                    <p>wanna join? <a href='https://github.com/kognise/overengineering/' target='_blank' rel='noopener noreferrer'>head over to github</a> and create a pull request, or contact <a href='https://kognise.dev/' target='_blank' rel='noopener noreferrer'>me</a> asking politely.
+                    <p>do you make things and have a website showcasing such things? you should join! email <a href='mailto:hi@kognise.dev' target='_blank' rel='noopener noreferrer'>hi@kognise.dev</a> asking politely, or <a href='https://github.com/kognise/overengineering/' target='_blank' rel='noopener noreferrer'>head over to github</a> and create a pull request.
                 </body>
             </html>
         ",
