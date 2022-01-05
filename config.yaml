@@ -28,7 +28,7 @@ sites:
       links: '#ffffff'
     stylesheets:
       - https://fonts.googleapis.com/css?family=Montserrat&display=swap
-    font_stack: '"Montserrat", monospace'
+    font_stack: '"Montserrat", sans-serif'
 
 default_colors:
   border: '#000000'
