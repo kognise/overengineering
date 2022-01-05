@@ -28,7 +28,6 @@ sites:
       links: '#ffffff'
     stylesheets:
       - https://fonts.googleapis.com/css?family=Montserrat&display=swap
-      - https://piemadd.com/style.css
     font_stack: '"Montserrat", monospace'
 
 default_colors:
