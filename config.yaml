@@ -20,6 +20,16 @@ sites:
       text: '#002b36'
       links: '#d33682'
     font_stack: 'serif'
+  - name: piero
+    url: https://piemadd.com/
+    colors:
+      border: '#131517'
+      text: '#ffffff'
+      links: '#ffffff'
+    stylesheets:
+      - https://fonts.googleapis.com/css?family=Montserrat&display=swap
+      - https://piemadd.com/style.css
+    font_stack: '"Montserrat", monospace'
 
 default_colors:
   border: '#000000'
