@@ -40,4 +40,4 @@ to embed the webring on your site, replace `<name>` with your site's name, of co
 - sites must list at least 3 things the owner made or majorly contributed to.
 - members must embed the webring widget on the main page of their site.
 - no illegal, nsfw, or gory content is allowed. duh.
-don't be evil, unless you really have to.
+- don't be evil, unless you really have to.
