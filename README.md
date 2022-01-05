@@ -22,6 +22,8 @@ a full config entry looks like this, everything besides `name` and `url` is opti
 
 `colors`, `stylesheets`, and `font_stack` can be provided if you wish to make the embed's design more closely match your site.
 
+the link color should have good contrast with your website background and white.
+
 ## embed
 
 to embed the webring on your site, replace `<name>` with your site's name, of course:
