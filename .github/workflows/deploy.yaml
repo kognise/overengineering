@@ -9,6 +9,7 @@ jobs:
       - uses: actions/cache@v2
         with:
           path: target
+          key: ${{hashFiles('Cargo.lock')}}
 
       - uses: actions-rs/toolchain@v1
         with:
