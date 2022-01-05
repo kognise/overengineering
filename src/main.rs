@@ -65,7 +65,7 @@ fn index() -> Html<String> {
                 </head>
                 <body>
                     <h1>overengineeRING</h1>
-                    <p>a <a href='https://en.wikipedia.org/wiki/Webring' target='_blank' rel='noopener noreferrer'>webring</a> of people who make cool stuff.</p>
+                    <p>a <a href='https://en.wikipedia.org/wiki/Webring' target='_blank' rel='noopener noreferrer'>webring</a> of people who make cool stuff. technology, music, art, anything goes!</p>
 
                     <h2>members</h2>
                     <ul>{member_list}</ul>
