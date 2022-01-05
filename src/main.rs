@@ -148,15 +148,15 @@ fn embed(name: String, text_color: Option<String>, border_color: Option<String>,
                     {head_include}
                 </head>
                 <body>
-                    <a href='{prev_url}' target='_blank'>&laquo; prev</a>
+                    <a href='{prev_url}' target='_parent'>&laquo; prev</a>
                     <nav>
                         <p>{name} @ overengineeRING</p>
                         <div>
                             <a href='/' target='_blank'>list</a>
-                            <a href='/rand' target='_blank'>rand</a>
+                            <a href='/rand' target='_parent'>rand</a>
                         </div>
                     </nav>
-                    <a href='{next_url}' target='_blank'>next &raquo;</a>
+                    <a href='{next_url}' target='_parent'>next &raquo;</a>
                 </body>
             </html>
         ",
