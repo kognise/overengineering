@@ -120,6 +120,7 @@ fn embed(name: String, text_color: Option<String>, border_color: Option<String>,
             <html lang='en'>
                 <head>
                     <meta charset='utf-8'>
+                    <meta name='robots' content='noindex'>
                     <title>overengineeRING embed</title>
                     <style>
                         body {{

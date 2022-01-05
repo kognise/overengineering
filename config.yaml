@@ -15,8 +15,14 @@ sites:
     text: '#002b36'
     links: '#d33682'
   font_stack: 'serif'
+- name: sugarfi
+    url: https://sugarfi.dev/
+    stylesheets:
+      - https://sugarfi.dev/fonts.css
+    font_stack: '"Free Pixel"'
+
 
 default_colors:
-  border: '#4a4a4a'
+  border: '#000000'
   text: '#000000'
-  links: '#0000ff'
+  links: '#0000ee'
