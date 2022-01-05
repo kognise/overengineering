@@ -13,6 +13,13 @@ sites:
     stylesheets:
       - https://sugarfi.dev/fonts.css
     font_stack: '"Free Pixel"'
+  - name: arcade
+    url: https://arcade.srht.site
+    colors:
+      border: '#268bd2'
+      text: '#002b36'
+      links: '#d33682'
+    font_stack: 'serif'
 
 default_colors:
   border: '#000000'
