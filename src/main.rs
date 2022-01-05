@@ -93,7 +93,7 @@ fn index() -> Html<String> {
                 </head>
                 <body>
                     <h1>overengineeRING</h1>
-                    <p>a <a href='https://en.wikipedia.org/wiki/Webring' target='_blank' rel='noopener noreferrer'>webring</a> of people who make cool stuff. technology, music, art, anything goes!</p>
+                    <p>a <a href='https://en.wikipedia.org/wiki/Webring' target='_blank' rel='noopener noreferrer'>webring</a> of people who make cool stuff. technology, music, art, writing, anything goes!</p>
 
                     <h2>members</h2>
                     <ul>{member_list}</ul>
@@ -101,7 +101,7 @@ fn index() -> Html<String> {
                     <h2>criteria</h2>
                     <ul>
                         <li>this is a webring containing personal sites only.</li>
-                        <li>sites must reference at least 3 things the owner created. the majority of the site content should be written and layed out by the site's creator(s).</li>
+                        <li>sites must reference at least 4 things the owner created. creations in any category count. the majority of the site content should be written and layed out by the site's creator(s).</li>
                         <li>no illegal, nsfw, or gory content is allowed. duh.</li>
                         <li>members must embed the webring widget on the main page of their site.</li>
                         <li>don't be evil, unless you really have to.</li>
