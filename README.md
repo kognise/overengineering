@@ -1,6 +1,6 @@
 # overengineeRING
 
-a [webring](https://en.wikipedia.org/wiki/Webring) of people who make cool stuff. <https://overengineering.kognise.dev/>
+a [webring](https://en.wikipedia.org/wiki/Webring) of people who make cool stuff. technology, music, art, anything goes! <https://overengineering.kognise.dev/>
 
 ## joining
 
