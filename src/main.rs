@@ -1,11 +1,12 @@
 #[macro_use]
 extern crate rocket;
 use lazy_static::lazy_static;
-use rocket::response::content::Html;
-use rocket::shield::Shield;
-use rocket::response::Redirect;
-use serde::{Deserialize, Serialize};
 use rand::seq::SliceRandom;
+use rocket::request::{Request, FromRequest, Outcome};
+use rocket::response::{Redirect, content::Html};
+use rocket::shield::Shield;
+use serde::{Deserialize, Serialize};
+use std::{convert::Infallible, future::Future, pin::Pin};
 
 const CONFIG_YAML: &str = include_str!("../config.yaml");
 
@@ -37,7 +38,34 @@ pub struct Config {
 
 #[inline(always)]
 fn html(mut markup: String) -> Html<String> {
-    Html(minify_html_onepass::in_place_str(&mut markup, &minify_html_onepass::Cfg { minify_css: true, minify_js: false }).unwrap().to_string())
+    Html(
+        minify_html_onepass::in_place_str(
+            &mut markup,
+            &minify_html_onepass::Cfg {
+                minify_css: true,
+                minify_js: false,
+            },
+        )
+        .unwrap()
+        .to_string(),
+    )
+}
+
+#[derive(Debug)]
+struct LastSegment(Option<String>);
+
+impl<'r> FromRequest<'r> for LastSegment {
+    type Error = Infallible;
+    fn from_request<'a: 't, 't>(
+        request: &'r Request<'a>,
+    ) -> Pin<Box<dyn Future<Output = Outcome<Self, Self::Error>> + Send + 't>> {
+        Outcome::Success(LastSegment(
+            request.headers().get_one("Referer")
+                .and_then(|h| h.split("/").last())
+                .map(|s| s.to_string()),
+        ))
+        .pin()
+    }
 }
 
 #[get("/")]
@@ -90,12 +118,26 @@ fn index() -> Html<String> {
 }
 
 #[get("/rand")]
-fn random() -> Redirect {
-    Redirect::to(&CONFIG.sites.choose(&mut rand::thread_rng()).unwrap().url)
+fn random(last_segment: LastSegment) -> Redirect {
+    Redirect::to(&CONFIG.sites
+        .iter()
+        .filter(|s| if let Some(ref last_segment) = last_segment.0 {
+            s.name != *last_segment
+        } else {
+            true
+        })
+        .collect::<Vec<&Site>>()
+        .choose(&mut rand::thread_rng()
+    ).unwrap().url)
 }
 
 #[get("/embed/<name>?<text_color>&<border_color>&<link_color>")]
-fn embed(name: String, text_color: Option<String>, border_color: Option<String>, link_color: Option<String>) -> Html<String> {
+fn embed(
+    name: String,
+    text_color: Option<String>,
+    border_color: Option<String>,
+    link_color: Option<String>,
+) -> Html<String> {
     let site_index = CONFIG
         .sites
         .iter()
@@ -103,7 +145,11 @@ fn embed(name: String, text_color: Option<String>, border_color: Option<String>,
         .unwrap();
     let ref site = CONFIG.sites[site_index];
 
-    let mut colors = site.colors.as_ref().unwrap_or(&CONFIG.default_colors).clone();
+    let mut colors = site
+        .colors
+        .as_ref()
+        .unwrap_or(&CONFIG.default_colors)
+        .clone();
     if let Some(text_color) = text_color {
         colors.text = text_color;
     }
