@@ -29,6 +29,8 @@ sites:
     stylesheets:
       - https://fonts.googleapis.com/css?family=Montserrat&display=swap
     font_stack: '"Montserrat", sans-serif' 
+  - name: roylatgnail
+    url: https://estrogens.rocks/
 
 default_colors:
   border: '#000000'
