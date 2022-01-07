@@ -19,7 +19,7 @@ sites:
       border: '#268bd2'
       text: '#002b36'
       links: '#d33682'
-    font_stack: 'serif'
+    font_stack: serif
   - name: piero
     url: https://piemadd.com/
     colors:
@@ -31,6 +31,7 @@ sites:
     font_stack: '"Montserrat", sans-serif' 
   - name: roylatgnail
     url: https://estrogens.rocks/
+    font_stack: sans-serif
 
 default_colors:
   border: '#000000'
