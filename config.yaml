@@ -36,7 +36,7 @@ sites:
     url: https://celeste.exposed/
     stylesheets: 
       - https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap
-    font_stack: '"Libre Baskerville", sans-serif'
+    font_stack: '"Libre Baskerville", serif'
 
 default_colors:
   border: '#000000'
