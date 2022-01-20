@@ -27,6 +27,7 @@ pub struct Site {
     pub url: String,
     pub colors: Option<SiteColors>,
     pub font_stack: Option<String>,
+    pub font_size: Option<String>,
     pub stylesheets: Option<Vec<String>>,
 }
 
@@ -84,7 +85,7 @@ fn index() -> Html<String> {
                             margin: 0;
                             padding: 30px;
                             box-sizing: border-box;
-                            font-size: 1.1em;
+                            font-size: 1rem;
                         }}
                         h1 {{ margin: 0; }}
                         h2 {{ margin: 0; margin-top: 30px; }}
@@ -131,12 +132,13 @@ fn random(last_segment: LastSegment) -> Redirect {
     ).unwrap().url)
 }
 
-#[get("/embed/<name>?<text_color>&<border_color>&<link_color>")]
+#[get("/embed/<name>?<text_color>&<border_color>&<link_color>&<font_size>")]
 fn embed(
     name: String,
     text_color: Option<String>,
     border_color: Option<String>,
     link_color: Option<String>,
+    font_size: Option<String>,
 ) -> Html<String> {
     let site_index = CONFIG
         .sites
@@ -171,6 +173,7 @@ fn embed(
                     <style>
                         body {{
                             font-family: {font_stack};
+                            font-size: {font_size};
                             color: {text_color};
                             border: 1px solid {border_color};
                             margin: 0;
@@ -210,6 +213,7 @@ fn embed(
         prev_url = CONFIG.sites[if site_index == 0 { CONFIG.sites.len() - 1 } else { site_index - 1 }].url,
         next_url = CONFIG.sites[(site_index + 1) % CONFIG.sites.len()].url,
         font_stack = site.font_stack.as_ref().unwrap_or(&"monospace".to_string()),
+        font_size = font_size.as_ref().unwrap_or(site.font_size.as_ref().unwrap_or(&"initial".to_string())),
         head_include = site.stylesheets.as_ref().map(
             |stylesheets| stylesheets.iter()
                 .map(|stylesheet| format!("<link rel='stylesheet' href='{}'>", stylesheet))

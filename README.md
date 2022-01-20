@@ -20,9 +20,14 @@ a full config entry looks like this, everything besides `name` and `url` is opti
   stylesheets:
     - https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&display=swap
   font_stack: '"IBM Plex Mono", monospace'
+  font_size: 1em
 ```
 
-`colors`, `stylesheets`, and `font_stack` can be provided if you wish to make the embed's design more closely match your site.
+and renders like this:
+
+![kognise.dev embed example](https://doggo.ninja/h0cO3D.png)
+
+`colors`, `stylesheets`, `font_size`, and `font_stack` can be provided if you wish to make the embed's design more closely match your site.
 
 the link color should have good contrast with your website background and white.
 

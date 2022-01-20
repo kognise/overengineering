@@ -40,6 +40,7 @@ sites:
     font_stack: '"Libre Baskerville", serif'
   - name: skylar bleed
     url: https://murder.rocks/~skye/README.html
+    font_size: 16px
 
 default_colors:
   border: '#000000'
