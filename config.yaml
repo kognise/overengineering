@@ -38,6 +38,8 @@ sites:
       - https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap
       - https://celeste.exposed/embed.css
     font_stack: '"Libre Baskerville", serif'
+  - name: skylar bleed
+    url: https://murder.rocks/~skye/README.html
 
 default_colors:
   border: '#000000'
