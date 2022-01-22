@@ -41,6 +41,24 @@ sites:
   - name: skylar bleed
     url: https://murder.rocks/~skye/README.html
     font_size: 16px
+  - name: ishan
+    url: https://ishan.is-a.dev/
+    colors:
+      border: '#c9b697'
+      text: '#000000'
+      links: '#4d96c6'
+    stylesheets:
+      - https://fonts.googleapis.com/css?family=Nunito&display=swap
+    font_stack: Futura, Nunito, Verdana, sans-serif 
+  - name: perrypal
+    url: https://perrypal.xyz/
+    colors:
+      border: 'transparent'
+      text: '#ffffff'
+      links: '#275a90'
+    stylesheets:
+      - https://fonts.googleapis.com/css?family=Quicksand&display=swap
+    font_stack: Quicksand
 
 default_colors:
   border: '#000000'
