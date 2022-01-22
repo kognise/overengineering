@@ -81,11 +81,10 @@ fn index() -> Html<String> {
                     <title>overengineeRING</title>
                     <style>
                         body {{
-                            font-family: monospace;
+                            font-family: ui-monospace, Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace;
                             margin: 0;
                             padding: 30px;
                             box-sizing: border-box;
-                            font-size: 1rem;
                         }}
                         h1 {{ margin: 0; }}
                         h2 {{ margin: 0; margin-top: 30px; }}
