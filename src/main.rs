@@ -85,6 +85,7 @@ fn index() -> Html<String> {
                             margin: 0;
                             padding: 30px;
                             box-sizing: border-box;
+                            font-size: 0.8125rem;
                         }}
                         h1 {{ margin: 0; }}
                         h2 {{ margin: 0; margin-top: 30px; }}
