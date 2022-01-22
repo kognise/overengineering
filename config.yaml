@@ -59,6 +59,12 @@ sites:
     stylesheets:
       - https://fonts.googleapis.com/css?family=Quicksand&display=swap
     font_stack: Quicksand
+  - name: hypnotic
+    url: https://hypnoticsiege.net/
+    colors:
+      border: '#393e46'
+      text: '#ffffff'
+      links: '#3fa3eb'
 
 default_colors:
   border: '#000000'
