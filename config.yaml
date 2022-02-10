@@ -59,6 +59,16 @@ sites:
     stylesheets:
       - https://fonts.googleapis.com/css?family=Quicksand&display=swap
     font_stack: Quicksand
+  - name: khalby786
+    url: https://khaleelgibran.com
+    colors:
+      border: '#575757';
+      text: '#ffffff'
+      links: '#5539cc'
+    stylesheets:
+      - https://fonts.googleapis.com/css2?family=Fira+Code&display=swap
+    font_stack: "'Fira Code', monospace"
+    font_size: 14px
 
 default_colors:
   border: '#000000'
