@@ -59,6 +59,17 @@ sites:
     stylesheets:
       - https://fonts.googleapis.com/css?family=Quicksand&display=swap
     font_stack: Quicksand
+  
+  - name: wave
+  url: https://wavecat.xyz/
+  colors:
+    border: '#6F6C94'
+    text: '#ffffff'
+    links: '#7BA1B5'
+  stylesheets:
+    - https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap
+  font_stack: "Press Start 2P"
+  font_size: 1em
 
 default_colors:
   border: '#000000'
