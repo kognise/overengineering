@@ -78,7 +78,7 @@ sites:
   - name: khalby786
     url: https://khaleelgibran.com
     colors:
-      border: '#575757';
+      border: '#575757'
       text: '#ffffff'
       links: '#5539cc'
     stylesheets:
