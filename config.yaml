@@ -85,6 +85,13 @@ sites:
       - https://fonts.googleapis.com/css2?family=Fira+Code&display=swap
     font_stack: "'Fira Code', monospace"
     font_size: 14px
+  - name: munvoseli
+    url: https://munvoseli.github.io/
+    colors:
+      border: '#112233'
+      text: '#000000'
+      links: '#445566'
+    font_stack: 'monospace, sans-serif'
 
 default_colors:
   border: '#000000'
