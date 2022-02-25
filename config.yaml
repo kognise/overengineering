@@ -14,7 +14,7 @@ sites:
       - https://sugarfi.dev/fonts.css
     font_stack: '"Free Pixel"'
   - name: arcade
-    url: https://raleighwi.se
+    url: https://arcadewise.me/
     colors:
       border: '#268bd2'
       text: '#002b36'
@@ -79,12 +79,19 @@ sites:
     url: https://khaleelgibran.com
     colors:
       border: '#575757'
-      text: '#ffffff'
+      text: '#000000'
       links: '#5539cc'
     stylesheets:
       - https://fonts.googleapis.com/css2?family=Fira+Code&display=swap
     font_stack: "'Fira Code', monospace"
     font_size: 14px
+  - name: munvoseli
+    url: https://munvoseli.github.io/
+    colors:
+      border: '#112233'
+      text: '#000000'
+      links: '#445566'
+    font_stack: 'monospace, sans-serif'
 
 default_colors:
   border: '#000000'
