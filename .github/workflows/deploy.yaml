@@ -12,10 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - uses: actions/cache@v2
-        with:
-          path: target
-          key: ${{hashFiles('Cargo.lock')}}
+      - uses: Swatinem/rust-cache@v1
 
       - uses: actions-rs/toolchain@v1
         with:
