@@ -20,15 +20,15 @@ sites:
       text: '#002b36'
       links: '#d33682'
     font_stack: serif
-  - name: piero
-    url: https://piemadd.com/
-    colors:
-      border: '#131517'
-      text: '#ffffff'
-      links: '#468af0'
-    stylesheets:
-      - https://fonts.googleapis.com/css?family=Montserrat&display=swap
-    font_stack: '"Montserrat", sans-serif' 
+  # - name: piero
+  #   url: https://piemadd.com/
+  #   colors:
+  #     border: '#131517'
+  #     text: '#ffffff'
+  #     links: '#468af0'
+  #   stylesheets:
+  #     - https://fonts.googleapis.com/css?family=Montserrat&display=swap
+  #   font_stack: '"Montserrat", sans-serif' 
   - name: roylatgnail
     url: https://estrogens.rocks/
     font_stack: sans-serif
