@@ -1,4 +1,4 @@
-# overengineeRING
+![overengineeRING](https://raw.githubusercontent.com/kognise/overengineering/main/banner.png)
 
 a [webring](https://en.wikipedia.org/wiki/Webring) of interesting people; makers of technology, music, art, or writing.
 
