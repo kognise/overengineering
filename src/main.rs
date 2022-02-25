@@ -90,6 +90,12 @@ fn index() -> Html<String> {
                             box-sizing: border-box;
                             font-size: 0.8125rem;
                         }}
+                        img {{
+                            width: min(100%, 1200px);
+                            height: auto;
+                            margin: 0 auto;
+                            display: block;
+                        }}
                         h1 {{ margin: 0; }}
                         h2 {{ margin: 0; margin-top: 30px; }}
                         p, ul {{ margin: 10px 0; }}
@@ -99,7 +105,10 @@ fn index() -> Html<String> {
                     </style>
                 </head>
                 <body>
-                    <h1>overengineeRING</h1>
+                    <h1>
+                        <img src='https://raw.githubusercontent.com/kognise/overengineering/main/banner.png' alt='overengineeRING logo' title='overengineeRING' width='1200' height='200'>
+                    </h1>
+
                     <p>a <a href='https://en.wikipedia.org/wiki/Webring' target='_blank' rel='noopener noreferrer'>webring</a> of interesting people; makers of technology, music, art, or writing.</p>
                     <p>everyone on this list has different skill levels and different personalities, but i guarantee you'll get something out of talking to them or looking at their sites.</p>
 
