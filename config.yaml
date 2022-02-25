@@ -14,7 +14,7 @@ sites:
       - https://sugarfi.dev/fonts.css
     font_stack: '"Free Pixel"'
   - name: arcade
-    url: https://raleighwi.se
+    url: https://arcadewise.me/
     colors:
       border: '#268bd2'
       text: '#002b36'
