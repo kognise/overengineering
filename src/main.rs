@@ -95,7 +95,7 @@ fn index() -> Html<String> {
                         p, ul {{ margin: 10px 0; }}
                         a {{ color: #ff6b60; }}
                         ::marker {{ color: #4a6294; }}
-                        ::selection {{ background: #ff6b60; color: #ffffff; }}
+                        ::selection {{ background: #9d1f15; color: #ffffff; }}
                     </style>
                 </head>
                 <body>
