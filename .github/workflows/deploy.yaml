@@ -6,6 +6,9 @@ on:
       - main
 
 jobs:
+  strategy:
+    max-parallel: 1
+    
   deploy:
     runs-on: ubuntu-18.04
     environment: main
