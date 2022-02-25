@@ -75,16 +75,16 @@ sites:
       - https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap
     font_stack: "Press Start 2P"
     font_size: 1em
-  - name: khalby786
-    url: https://khaleelgibran.com
-    colors:
-      border: '#575757'
-      text: '#000000'
-      links: '#5539cc'
-    stylesheets:
-      - https://fonts.googleapis.com/css2?family=Fira+Code&display=swap
-    font_stack: "'Fira Code', monospace"
-    font_size: 14px
+#   - name: khalby786
+#     url: https://khaleelgibran.com
+#     colors:
+#       border: '#575757'
+#       text: '#000000'
+#       links: '#5539cc'
+#     stylesheets:
+#       - https://fonts.googleapis.com/css2?family=Fira+Code&display=swap
+#     font_stack: "'Fira Code', monospace"
+#     font_size: 14px
   - name: munvoseli
     url: https://munvoseli.github.io/
     colors:
