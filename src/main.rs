@@ -81,15 +81,21 @@ fn index() -> Html<String> {
                     <title>overengineeRING</title>
                     <style>
                         body {{
+                            background: #0b1728;
+                            color: #bdd2ff;
                             font-family: ui-monospace, Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace;
                             margin: 0;
-                            padding: 30px;
+                            padding: 40px;
+                            line-height: 1.4;
                             box-sizing: border-box;
                             font-size: 0.8125rem;
                         }}
                         h1 {{ margin: 0; }}
                         h2 {{ margin: 0; margin-top: 30px; }}
                         p, ul {{ margin: 10px 0; }}
+                        a {{ color: #ff6b60; }}
+                        ::marker {{ color: #4a6294; }}
+                        ::selection {{ background: #ff6b60; color: #ffffff; }}
                     </style>
                 </head>
                 <body>
