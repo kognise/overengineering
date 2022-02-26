@@ -86,6 +86,16 @@ sites:
       text: '#000000'
       links: '#445566'
     font_stack: 'monospace, sans-serif'
+  - name: caramellow
+    url: https://caramellow.dev/
+    colors:
+      border: 'transparent'
+      text: '#c9ced9'
+      links: '#de4167'
+    font_stack: 'monospace, sans-serif'
+    stylesheets:
+      - https://fonts.googleapis.com/css2?family=Inter&display=swap
+    font_stack: "'Inter', sans-serif"
 
 default_colors:
   border: '#000000'
