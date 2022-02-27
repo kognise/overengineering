@@ -81,20 +81,36 @@ fn index() -> Html<String> {
                     <title>overengineeRING</title>
                     <style>
                         body {{
+                            background: #0b1728;
+                            color: #bdd2ff;
                             font-family: ui-monospace, Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace;
                             margin: 0;
-                            padding: 30px;
+                            padding: 40px;
+                            line-height: 1.4;
                             box-sizing: border-box;
                             font-size: 0.8125rem;
+                        }}
+                        img {{
+                            width: min(100%, 1200px);
+                            height: auto;
+                            margin: 0 auto;
+                            display: block;
                         }}
                         h1 {{ margin: 0; }}
                         h2 {{ margin: 0; margin-top: 30px; }}
                         p, ul {{ margin: 10px 0; }}
+                        a {{ color: #ff6b60; }}
+                        ::marker {{ color: #4a6294; }}
+                        ::selection {{ background: #9d1f15; color: #ffffff; }}
                     </style>
                 </head>
                 <body>
-                    <h1>overengineeRING</h1>
-                    <p>a <a href='https://en.wikipedia.org/wiki/Webring' target='_blank' rel='noopener noreferrer'>webring</a> of people who make cool stuff. technology, music, art, writing, anything goes!</p>
+                    <h1>
+                        <img src='https://raw.githubusercontent.com/kognise/overengineering/main/banner.png' alt='overengineeRING logo' title='overengineeRING' width='1200' height='200'>
+                    </h1>
+
+                    <p>a <a href='https://en.wikipedia.org/wiki/Webring' target='_blank' rel='noopener noreferrer'>webring</a> of interesting people; makers of technology, music, art, or writing.</p>
+                    <p>everyone on this list has different skill levels and different personalities, but i guarantee you'll get something out of talking to them or looking at their sites.</p>
 
                     <h2>members</h2>
                     <ul>{member_list}</ul>
@@ -102,7 +118,7 @@ fn index() -> Html<String> {
                     <h2>criteria</h2>
                     <ul>
                         <li>this is a webring containing personal sites only.</li>
-                        <li>sites must reference at least 4 things the owner created. creations in any category count. the majority of the site content should be written and layed out by the site's creator(s).</li>
+                        <li>you should be an interesting person! a great gauge is whether you think people will get something out of visiting your website, whether inspiration or curiosity.</li>
                         <li>no illegal, nsfw, or gory content is allowed. duh.</li>
                         <li>members must embed the webring widget on the main page of their site.</li>
                         <li>don't be evil, unless you really have to.</li>

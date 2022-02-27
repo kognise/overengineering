@@ -9,17 +9,18 @@ jobs:
   deploy:
     runs-on: ubuntu-18.04
     environment: main
+    strategy:
+      max-parallel: 1
     steps:
       - uses: actions/checkout@v2
-
-      - uses: actions/cache@v2
-        with:
-          path: target
-          key: ${{hashFiles('Cargo.lock')}}
 
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
+
+      - uses: Swatinem/rust-cache@v1
+        with:
+          sharedKey: overengineering
       
       - uses: actions-rs/cargo@v1
         with:
@@ -32,3 +33,10 @@ jobs:
           REMOTE_HOST: ${{secrets.REMOTE_HOST}}
           REMOTE_USER: ${{secrets.REMOTE_USER}}
           SOURCE: "target/release/overengineering"
+
+      - uses: garygrossgarten/github-action-ssh@release
+        with:
+          command: /root/restart-overengineering.sh
+          host: ${{secrets.REMOTE_HOST}}
+          username: ${{secrets.REMOTE_USER}}
+          privateKey: ${{secrets.SERVER_SSH_KEY}}
