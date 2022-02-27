@@ -2,9 +2,9 @@ sites:
   - name: kognise
     url: https://kognise.dev/
     colors:
-      border: '#ced4da'
-      text: '#000000'
-      links: '#6741d9'
+      border: "#ced4da"
+      text: "#000000"
+      links: "#6741d9"
     stylesheets:
       - https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&display=swap
     font_stack: '"IBM Plex Mono", monospace'
@@ -16,25 +16,25 @@ sites:
   - name: arcade
     url: https://arcadewise.me/
     colors:
-      border: '#268bd2'
-      text: '#002b36'
-      links: '#d33682'
+      border: "#268bd2"
+      text: "#002b36"
+      links: "#d33682"
     font_stack: serif
   - name: piero
     url: https://piemadd.com/
     colors:
-      border: '#131517'
-      text: '#ffffff'
-      links: '#468af0'
+      border: "#131517"
+      text: "#ffffff"
+      links: "#468af0"
     stylesheets:
       - https://fonts.googleapis.com/css?family=Montserrat&display=swap
-    font_stack: '"Montserrat", sans-serif' 
+    font_stack: '"Montserrat", sans-serif'
   - name: roylatgnail
     url: https://estrogens.rocks/
     font_stack: sans-serif
   - name: celeste
     url: https://celeste.exposed/
-    stylesheets: 
+    stylesheets:
       - https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap
       - https://celeste.exposed/embed.css
     font_stack: '"Libre Baskerville", serif'
@@ -44,33 +44,33 @@ sites:
   - name: ishan
     url: https://ishan.is-a.dev/
     colors:
-      border: '#c9b697'
-      text: '#000000'
-      links: '#4d96c6'
+      border: "#c9b697"
+      text: "#000000"
+      links: "#4d96c6"
     stylesheets:
       - https://fonts.googleapis.com/css?family=Nunito&display=swap
-    font_stack: Futura, Nunito, Verdana, sans-serif 
+    font_stack: Futura, Nunito, Verdana, sans-serif
   - name: perrypal
     url: https://perrypal.xyz/
     colors:
-      border: 'transparent'
-      text: '#ffffff'
-      links: '#275a90'
+      border: "transparent"
+      text: "#ffffff"
+      links: "#275a90"
     stylesheets:
       - https://fonts.googleapis.com/css?family=Quicksand&display=swap
     font_stack: Quicksand
   - name: hypnotic
     url: https://hypnoticsiege.net/
     colors:
-      border: '#393e46'
-      text: '#ffffff'
-      links: '#3fa3eb'
+      border: "#393e46"
+      text: "#ffffff"
+      links: "#3fa3eb"
   - name: wave
     url: https://wavecat.xyz/
     colors:
-      border: '#6F6C94'
-      text: '#ffffff'
-      links: '#7BA1B5'
+      border: "#6F6C94"
+      text: "#ffffff"
+      links: "#7BA1B5"
     stylesheets:
       - https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap
     font_stack: "Press Start 2P"
@@ -78,9 +78,9 @@ sites:
   - name: khalby786
     url: https://khaleelgibran.com
     colors:
-      border: '#575757'
-      text: '#000000'
-      links: '#5539cc'
+      border: "#575757"
+      text: "#000000"
+      links: "#5539cc"
     stylesheets:
       - https://fonts.googleapis.com/css2?family=Fira+Code&display=swap
     font_stack: "'Fira Code', monospace"
@@ -88,12 +88,22 @@ sites:
   - name: munvoseli
     url: https://munvoseli.github.io/
     colors:
-      border: '#112233'
-      text: '#000000'
-      links: '#445566'
-    font_stack: 'monospace, sans-serif'
+      border: "#112233"
+      text: "#000000"
+      links: "#445566"
+    font_stack: "monospace, sans-serif"
+  - name: kaidevrim
+    url: https://devrim.tech/
+    colors:
+      border: "#EBD7EB"
+      text: "#000000"
+      links: "#0426fd"
+    stylesheets:
+      - https://fonts.googleapis.com/css2?family=Comic+Neue&display=swap
+    font_stack: '"Comic Sans", "Comic Neue"'
+    font_size: 1em
 
 default_colors:
-  border: '#000000'
-  text: '#000000'
-  links: '#0000ee'
+  border: "#000000"
+  text: "#000000"
+  links: "#0000ee"
