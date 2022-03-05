@@ -95,6 +95,13 @@ sites:
     stylesheets:
       - https://fonts.googleapis.com/css2?family=Inter&display=swap
     font_stack: "'Inter', sans-serif"
+  - name: kaidevrim
+    url: https://devrim.tech/
+    colors:
+      border: '#ebd7eb'
+      text: '#000000'
+      links: '#0426fd'
+    font_stack: '-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji",Segoe UI Symbol'
 
 default_colors:
   border: '#000000'
