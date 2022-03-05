@@ -68,7 +68,7 @@ sites:
     stylesheets:
       - https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap
     font_stack: "'Press Start 2P'"
-    font_size: 1em
+    font_size: 0.75em
   - name: khalby786
     url: https://khaleelgibran.com
     colors:
