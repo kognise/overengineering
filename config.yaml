@@ -8,11 +8,11 @@ sites:
     stylesheets:
       - https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&display=swap
     font_stack: '"IBM Plex Mono", monospace'
-  - name: sugarfi
-    url: https://sugarfi.dev/
-    stylesheets:
-      - https://sugarfi.dev/fonts.css
-    font_stack: '"Free Pixel"'
+#   - name: sugarfi
+#     url: https://sugarfi.dev/
+#     stylesheets:
+#       - https://sugarfi.dev/fonts.css
+#     font_stack: '"Free Pixel"'
   - name: arcade
     url: https://arcadewise.me/
     colors:
