@@ -98,7 +98,7 @@ sites:
   - name: kaidevrim
     url: https://devrim.tech/
     colors:
-      border: '#ebd7eb'
+      border: '#000'
       text: '#000000'
       links: '#0426fd'
     font_stack: '-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji",Segoe UI Symbol'
