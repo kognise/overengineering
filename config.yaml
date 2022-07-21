@@ -102,6 +102,8 @@ sites:
       text: '#000000'
       links: '#0426fd'
     font_stack: '-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji",Segoe UI Symbol'
+  - name: seirdy
+    url: https://seirdy.one/
 
 default_colors:
   border: '#000000'
