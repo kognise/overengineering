@@ -13,7 +13,7 @@ sites:
 #     stylesheets:
 #       - https://sugarfi.dev/fonts.css
 #     font_stack: '"Free Pixel"'
-  - name: reeseric.ci
+  - name: reesericci
     url: https://reeseric.ci
     stylesheets: 
       - https://reeseric.ci/_app/assets/pages/__layout.svelte-24e95604.css
