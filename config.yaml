@@ -102,6 +102,15 @@ sites:
       text: '#000000'
       links: '#0426fd'
     font_stack: '-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji",Segoe UI Symbol'
+  - name: jmibo
+    url: https://jmibo.neocities.org/
+    colors:
+      border: '#5b72a3'
+      text: '#c1cadd'
+      links: '#5b72a3'
+    stylesheets:
+      - https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap
+    font-stack: "'Roboto Mono', monospace"
 
 default_colors:
   border: '#000000'
