@@ -102,6 +102,18 @@ sites:
       text: '#000000'
       links: '#0426fd'
     font_stack: '-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji",Segoe UI Symbol'
+  - name: chozorho
+    url: https://themathjester.com/
+    colors:
+      border: 'transparent'
+      text: '#ffffff'
+      links: '#0426fd'
+    stylesheets:
+      - https://themathjester.com/main_stylesheet.css
+      - https://themathjester.com/lab/lab_stylesheet.css
+      - https://themathjester.com/lab/colors.css
+    font_stack: '"Love Letter", Fira'
+    font_size: 1em
 
 default_colors:
   border: '#000000'
