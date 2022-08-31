@@ -102,6 +102,16 @@ sites:
       text: '#000000'
       links: '#0426fd'
     font_stack: '-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji",Segoe UI Symbol'
+  - name: jianmin
+    url: https://jianminchen.com/
+    colors:
+      border: "#000000"
+      text: "#000000"
+      links: "#09f"
+    stylesheets:
+      - https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap
+    font_stack: '"EB Garamond", Georgia, serif'
+    font_size: 1.5rem
 
 default_colors:
   border: '#000000'
