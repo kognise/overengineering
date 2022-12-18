@@ -80,11 +80,11 @@ sites:
     font_stack: "'Fira Code', monospace"
     font_size: 14px
   - name: munvoseli
-    url: https://munvoseli.github.io/
+    url: https://nvo.osmarks.net/portal
     colors:
-      border: '#112233'
-      text: '#000000'
-      links: '#445566'
+      border: '#222222'
+      text: '#cccccc'
+      links: '#eeeeee'
     font_stack: 'monospace, sans-serif'
   - name: caramellow
     url: https://caramellow.dev/
