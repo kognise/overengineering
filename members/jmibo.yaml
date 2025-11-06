@@ -1,9 +1,0 @@
-name: jmibo
-url: https://jmibo.neocities.org/
-colors:
-  border: '#5b72a3'
-  text: '#c1cadd'
-  links: '#5b72a3'
-stylesheets:
-  - https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap
-font-stack: "'Roboto Mono', monospace"
