@@ -1,0 +1,9 @@
+name: perrypal
+url: https://perrypal.xyz/
+colors:
+  border: 'transparent'
+  text: '#ffffff'
+  links: '#275a90'
+stylesheets:
+  - https://fonts.googleapis.com/css?family=Quicksand&display=swap
+font_stack: Quicksand

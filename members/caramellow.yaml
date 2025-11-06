@@ -1,0 +1,9 @@
+name: caramellow
+url: https://caramellow.dev/
+colors:
+  border: 'transparent'
+  text: '#c9ced9'
+  links: '#de4167'
+stylesheets:
+  - https://fonts.googleapis.com/css2?family=Inter&display=swap
+font_stack: "'Inter', sans-serif"

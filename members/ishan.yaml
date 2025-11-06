@@ -1,0 +1,9 @@
+name: ishan
+url: https://ishan.is-a.dev/
+colors:
+  border: '#c9b697'
+  text: '#000000'
+  links: '#4d96c6'
+stylesheets:
+  - https://fonts.googleapis.com/css?family=Nunito&display=swap
+font_stack: Futura, Nunito, Verdana, sans-serif 

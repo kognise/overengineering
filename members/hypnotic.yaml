@@ -1,0 +1,9 @@
+name: hypnotic
+url: https://hypnoticsiege.net/
+colors:
+  border: '#393e46'
+  text: '#ffffff'
+  links: '#3fa3eb'
+stylesheets:
+  - https://fonts.googleapis.com/css?family=Montserrat&display=swap
+font_stack: '"Montserrat", sans-serif'

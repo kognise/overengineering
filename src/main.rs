@@ -1,43 +1,18 @@
 #[macro_use]
 extern crate rocket;
 use lazy_static::lazy_static;
+use overengineering::config::Member;
+use overengineering::health::{Health, MemberManager};
 use rand::seq::SliceRandom;
-use rocket::request::{Request, FromRequest, Outcome};
-use rocket::response::{Redirect, content::Html};
+use rocket::request::{FromRequest, Outcome, Request};
+use rocket::response::{content::Html, Redirect};
 use rocket::shield::Shield;
-use serde::{Deserialize, Serialize};
 use std::{convert::Infallible, future::Future, pin::Pin};
 
-const CONFIG_YAML: &str = include_str!("../config.yaml");
-
 lazy_static! {
-    static ref CONFIG: Config = serde_yaml::from_str(&CONFIG_YAML).unwrap();
+    static ref MEMBER_MANAGER: MemberManager = MemberManager::new();
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone)]
-pub struct SiteColors {
-    pub text: String,
-    pub border: String,
-    pub links: String,
-}
-
-#[derive(Serialize, Deserialize, Debug, Clone)]
-pub struct Site {
-    pub name: String,
-    pub url: String,
-    pub colors: Option<SiteColors>,
-    pub font_stack: Option<String>,
-    pub font_size: Option<String>,
-    pub stylesheets: Option<Vec<String>>,
-}
-
-#[derive(Serialize, Deserialize, Debug, Clone)]
-pub struct Config {
-    pub sites: Vec<Site>,
-    pub default_colors: SiteColors,
-}
-
-#[inline(always)]
 fn html(mut markup: String) -> Html<String> {
     Html(
         minify_html_onepass::in_place_str(
@@ -61,7 +36,9 @@ impl<'r> FromRequest<'r> for LastSegment {
         request: &'r Request<'a>,
     ) -> Pin<Box<dyn Future<Output = Outcome<Self, Self::Error>> + Send + 't>> {
         Outcome::Success(LastSegment(
-            request.headers().get_one("Referer")
+            request
+                .headers()
+                .get_one("Referer")
                 .and_then(|h| h.split("/").last())
                 .map(|s| s.to_string()),
         ))
@@ -70,7 +47,18 @@ impl<'r> FromRequest<'r> for LastSegment {
 }
 
 #[get("/")]
-fn index() -> Html<String> {
+async fn index() -> Html<String> {
+    let mut ok_members: Vec<Member> = vec![];
+    let mut not_ok_members: Vec<(Member, Option<Health>)> = vec![];
+
+    for (member, health) in MEMBER_MANAGER.members().await {
+        if matches!(health, Some(Health::Ok)) {
+            ok_members.push(member);
+        } else {
+            not_ok_members.push((member, health));
+        }
+    }
+
     html(format!(
         "
             <!DOCTYPE html>
@@ -100,6 +88,23 @@ fn index() -> Html<String> {
                         h2 {{ margin: 0; margin-top: 30px; }}
                         p, ul {{ margin: 10px 0; }}
                         a {{ color: #ff6b60; }}
+                        table {{
+                            border-collapse: collapse;
+                            margin-left: 40px;
+                        }}
+                        th, td {{
+                            padding: 5px 10px;
+                            text-align: left;
+                        }}
+                        th:first-child, td:first-child {{
+                            padding-left: 0;
+                        }}
+                        thead {{
+                            border-bottom: 1px solid #4a6294;
+                        }}
+                        th:not(:last-child), td:not(:last-child) {{
+                            border-right: 1px solid #4a6294;
+                        }}
                         ::marker {{ color: #4a6294; }}
                         ::selection {{ background: #9d1f15; color: #ffffff; }}
                     </style>
@@ -112,71 +117,107 @@ fn index() -> Html<String> {
                     <p>a <a href='https://en.wikipedia.org/wiki/Webring' target='_blank' rel='noopener noreferrer'>webring</a> of interesting people; makers of technology, music, art, or writing.</p>
                     <p>everyone on this list has different skill levels and different personalities, but i guarantee you'll get something out of talking to them or looking at their sites.</p>
 
-                    <h2>members</h2>
-                    <ul>{member_list}</ul>
+                    <h2>alive members</h2>
+                    <ul>{ok_member_list}</ul>
 
                     <h2>criteria</h2>
                     <ul>
                         <li>this is a webring containing personal sites only.</li>
                         <li>you should be an interesting person! a great gauge is whether you think people will get something out of visiting your website, whether inspiration or curiosity.</li>
                         <li>no illegal, nsfw, or gory content is allowed. duh.</li>
-                        <li>members must embed the webring widget on the main page of their site.</li>
+                        <li>members must embed the webring widget on the homepage of their site.</li>
                         <li>don't be evil, unless you really have to.</li>
                     </ul>
-                    <p>do you make things and have a website showcasing such things? you should join! email <a href='mailto:hi@kognise.dev' target='_blank' rel='noopener noreferrer'>hi@kognise.dev</a> asking politely, or <a href='https://github.com/kognise/overengineering/' target='_blank' rel='noopener noreferrer'>head over to github</a> and create a pull request.
+                    <p>do you make things and have a website showcasing such things? you should join! email <a href='mailto:hi@kognise.dev' target='_blank' rel='noopener noreferrer'>hi@kognise.dev</a> asking politely, or directly <a href='https://github.com/kognise/overengineering/new/main?filename=members/your_name_here.yaml&value=%23%20make%20sure%20to%20change%20the%20filename%20to%20your_name%2Eyaml%20%28alphanumeric%20with%20underscores%29%0A%23%20and%20delete%20this%20comment%21%0A%23%0A%23%20excited%20to%20have%20you%20join%20overengineeRING%20%3A%29%0A%0Aname%3A%20your%20name%20here%0Aurl%3A%20https%3A%2F%2Fexample%2Ecom%2F%0A%0A%23%20%3D%3D%3D%3D%20optional%20settings%3A%20%3D%3D%3D%3D%0A%23%20colors%3A%0A%23%20%20%20border%3A%20%27%23000000%27%0A%23%20%20%20text%3A%20%27%23000000%27%0A%23%20%20%20links%3A%20%27%230000ee%27%0A%23%20stylesheets%3A%0A%23%20%20%20-%20https%3A%2F%2Ffonts%2Egoogleapis%2Ecom%2Fcss2%3Ffamily%3DIBM%2BPlex%2BMono%3Awght%40400%26display%3Dswap%0A%23%20font_stack%3A%20%27%22IBM%20Plex%20Mono%22%2C%20monospace%27%0A%23%20font_size%3A%201em' target='_blank' rel='noopener noreferrer'>create a pull request</a>  adding your config file.
+                    
+                    <h2>healthcheck failures</h2>
+                    <p>members who fail their healthchecks will not show up on webring member sites or the random button.</p>
+                    <p>(fyi on the plurality of dead members, overengineeRING had some serious downtime for the past couple of years and kinda collapsed. now i'm bringing it back!)</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>name</th>
+                                <th>failure reason</th>
+                                <th>url</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {not_ok_member_list}
+                        </tbody>
+                    </table>
                 </body>
             </html>
         ",
-        member_list = CONFIG.sites.iter()
-            .map(|s| format!("<li><a href='{}' target='_blank' rel='noopener noreferrer'>{}</a></li>", s.url, s.name))
+        ok_member_list = ok_members.into_iter()
+            .map(|member| format!("<li><a href='{}' target='_blank' rel='noopener noreferrer'>{}</a></li>", member.url, member.name))
+            .collect::<Vec<String>>()
+            .join(""),
+        not_ok_member_list = not_ok_members.into_iter()
+            .map(|(member, health)| format!(
+                "<tr><td>{}</td><td>{}</td><td>{}</td></tr>",
+                member.name,
+                match health {
+                    Some(Health::Ok) => unreachable!(),
+                    Some(Health::SiteUnreachable) => "site unreachable",
+                    Some(Health::NoWebringEmbed) => "embed missing from site",
+                    Some(Health::SlugMismatch(_)) => "embed url has wrong slug",
+                    None => "healthcheck pending...",
+                },
+                member.url,
+            ))
             .collect::<Vec<String>>()
             .join("")
     ))
 }
 
 #[get("/rand")]
-fn random(last_segment: LastSegment) -> Redirect {
-    Redirect::to(&CONFIG.sites
-        .iter()
-        .filter(|s| if let Some(ref last_segment) = last_segment.0 {
-            s.name != *last_segment
-        } else {
-            true
-        })
-        .collect::<Vec<&Site>>()
-        .choose(&mut rand::thread_rng()
-    ).unwrap().url)
+async fn random(last_segment: LastSegment) -> Redirect {
+    Redirect::to(
+        MEMBER_MANAGER
+            .members()
+            .await
+            .into_iter()
+            .filter_map(|(member, health)| {
+                if matches!(health, Some(Health::Ok)) && last_segment.0 != Some(member.slug) {
+                    Some(member.url)
+                } else {
+                    None
+                }
+            })
+            .collect::<Vec<String>>()
+            .choose(&mut rand::thread_rng())
+            .cloned()
+            .unwrap(),
+    )
 }
 
-#[get("/embed/<name>?<text_color>&<border_color>&<link_color>&<font_size>")]
-fn embed(
-    name: String,
+#[get("/embed/<slug>?<text_color>&<border_color>&<link_color>&<font_size>")]
+async fn embed(
+    slug: String,
     text_color: Option<String>,
     border_color: Option<String>,
     link_color: Option<String>,
     font_size: Option<String>,
 ) -> Html<String> {
-    let site_index = CONFIG
-        .sites
-        .iter()
-        .position(|site| site.name == name)
-        .unwrap();
-    let ref site = CONFIG.sites[site_index];
+    // Healthy members, and this site!
+    let members: Vec<Member> = MEMBER_MANAGER
+        .members()
+        .await
+        .into_iter()
+        .filter_map(|(member, health)| {
+            if matches!(health, Some(Health::Ok)) || member.slug == slug {
+                Some(member)
+            } else {
+                None
+            }
+        })
+        .collect();
 
-    let mut colors = site
-        .colors
-        .as_ref()
-        .unwrap_or(&CONFIG.default_colors)
-        .clone();
-    if let Some(text_color) = text_color {
-        colors.text = text_color;
-    }
-    if let Some(border_color) = border_color {
-        colors.border = border_color;
-    }
-    if let Some(link_color) = link_color {
-        colors.links = link_color;
-    }
+    let (member_index, member) = members
+        .iter()
+        .enumerate()
+        .find(|(_, site)| site.slug == slug)
+        .unwrap();
 
     html(format!(
         "
@@ -208,7 +249,7 @@ fn embed(
                         a:hover {{ color: #ffffff; background: {link_color}; }}
                         a::before {{ content: '['; }}
                         a::after {{ content: ']'; }}
-                        p {{ margin: 0 0 10px 0;}}
+                        p {{ margin: 0 0 10px 0; }}
                     </style>
                     {head_include}
                 </head>
@@ -225,24 +266,25 @@ fn embed(
                 </body>
             </html>
         ",
-        name = name,
-        prev_url = CONFIG.sites[if site_index == 0 { CONFIG.sites.len() - 1 } else { site_index - 1 }].url,
-        next_url = CONFIG.sites[(site_index + 1) % CONFIG.sites.len()].url,
-        font_stack = site.font_stack.as_ref().unwrap_or(&"monospace".to_string()),
-        font_size = font_size.as_ref().unwrap_or(site.font_size.as_ref().unwrap_or(&"initial".to_string())),
-        head_include = site.stylesheets.as_ref().map(
-            |stylesheets| stylesheets.iter()
-                .map(|stylesheet| format!("<link rel='stylesheet' href='{}'>", stylesheet))
-                .collect::<Vec<String>>().join("")
-        ).unwrap_or("".to_string()),
-        text_color = colors.text,
-        border_color = colors.border,
-        link_color = colors.links,
+        name = member.name,
+        prev_url = members[if member_index == 0 { members.len() - 1 } else { member_index - 1 }].url,
+        next_url = members[(member_index + 1) % members.len()].url,
+        font_stack = member.font_stack.as_ref().unwrap_or(&"monospace".to_string()),
+        font_size = font_size.as_ref().unwrap_or(member.font_size.as_ref().unwrap_or(&"initial".to_string())),
+        head_include = member.stylesheets.iter()
+            .map(|stylesheet| format!("<link rel='stylesheet' href='{}'>", stylesheet))
+            .collect::<Vec<String>>()
+            .join(""),
+        text_color = text_color.as_ref().unwrap_or(&member.colors.text),
+        border_color = border_color.as_ref().unwrap_or(&member.colors.border),
+        link_color = link_color.as_ref().unwrap_or(&member.colors.links),
     ))
 }
 
 #[launch]
-fn rocket() -> _ {
+async fn rocket() -> _ {
+    let _ = MEMBER_MANAGER.members().await;
+
     rocket::build()
         .attach(Shield::new())
         .mount("/", routes![index, random, embed])
