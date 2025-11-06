@@ -14,24 +14,51 @@ jobs:
       cancel-in-progress: true
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Check for src changes
+        id: src_changes
+        run: |
+          if git diff --name-only HEAD^ HEAD | grep -q '^src/'; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
+          fi
 
       - uses: dtolnay/rust-toolchain@stable
+        if: steps.src_changes.outputs.changed == 'true'
 
       - uses: Swatinem/rust-cache@v2
+        if: steps.src_changes.outputs.changed == 'true'
         with:
           shared-key: overengineering
       
       - name: Build release
+        if: steps.src_changes.outputs.changed == 'true'
         run: cargo build --release --all-features
 
-      - uses: easingthemes/ssh-deploy@main
+      - name: Deploy binary and members
+        if: steps.src_changes.outputs.changed == 'true'
+        uses: easingthemes/ssh-deploy@main
         env:
           SSH_PRIVATE_KEY: ${{secrets.SERVER_SSH_KEY}}
           REMOTE_HOST: ${{secrets.REMOTE_HOST}}
           REMOTE_USER: ${{secrets.REMOTE_USER}}
-          SOURCE: "target/release/overengineering"
+          SOURCE: "target/release/overengineering members/"
+
+      - name: Deploy members only
+        if: steps.src_changes.outputs.changed == 'false'
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{secrets.SERVER_SSH_KEY}}
+          REMOTE_HOST: ${{secrets.REMOTE_HOST}}
+          REMOTE_USER: ${{secrets.REMOTE_USER}}
+          SOURCE: "members/"
+          ARGS: "-rltgoDzvR --delete"
 
       - uses: appleboy/ssh-action@v1.0.3
+        if: steps.src_changes.outputs.changed == 'true'
         with:
           host: ${{secrets.REMOTE_HOST}}
           username: ${{secrets.REMOTE_USER}}
