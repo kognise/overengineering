@@ -1,0 +1,8 @@
+name: aidan
+url: https://aidanjs.com/about/
+colors:
+  border: '#FF7A27'
+  text: '#000000'
+  links: '#5EA651'
+font_stack: '"Comic Sans MS", serif'
+font_size: 1em
