@@ -39,19 +39,7 @@ jobs:
         if: steps.src_changes.outputs.changed == 'true'
         run: cargo build --release --all-features
 
-      - name: Deploy binary and members
-        if: steps.src_changes.outputs.changed == 'true'
-        uses: easingthemes/ssh-deploy@main
-        env:
-          SSH_PRIVATE_KEY: ${{secrets.SERVER_SSH_KEY}}
-          REMOTE_HOST: ${{secrets.REMOTE_HOST}}
-          REMOTE_USER: ${{secrets.REMOTE_USER}}
-          SOURCE: "target/release/overengineering members/"
-          ARGS: "-rltgoDzvR --delete"
-          TARGET: "/root/overengineering/"
-
-      - name: Deploy members only
-        if: steps.src_changes.outputs.changed == 'false'
+      - name: Deploy members
         uses: easingthemes/ssh-deploy@main
         env:
           SSH_PRIVATE_KEY: ${{secrets.SERVER_SSH_KEY}}
@@ -59,6 +47,16 @@ jobs:
           REMOTE_USER: ${{secrets.REMOTE_USER}}
           SOURCE: "members/"
           ARGS: "-rltgoDzvR --delete"
+          TARGET: "/root/overengineering/members/"
+
+      - name: Deploy binary
+        if: steps.src_changes.outputs.changed == 'true'
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{secrets.SERVER_SSH_KEY}}
+          REMOTE_HOST: ${{secrets.REMOTE_HOST}}
+          REMOTE_USER: ${{secrets.REMOTE_USER}}
+          SOURCE: "target/release/overengineering"
           TARGET: "/root/overengineering/"
 
       - uses: appleboy/ssh-action@v1.0.3
