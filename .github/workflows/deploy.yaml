@@ -20,12 +20,11 @@ jobs:
       - name: Check for src changes
         id: src_changes
         run: |
-          # if git diff --name-only HEAD^ HEAD | grep -q '^src/'; then
-          #   echo "changed=true" >> $GITHUB_OUTPUT
-          # else
-          #   echo "changed=false" >> $GITHUB_OUTPUT
-          # fi
-          echo "changed=true" >> $GITHUB_OUTPUT
+          if git diff --name-only HEAD^ HEAD | grep -q '^src/'; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
+          fi
 
       - uses: dtolnay/rust-toolchain@stable
         if: steps.src_changes.outputs.changed == 'true'
