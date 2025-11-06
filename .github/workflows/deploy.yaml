@@ -11,7 +11,7 @@ jobs:
     environment: main
     concurrency:
       group: deploy-main
-      cancel-in-progress: true
+      cancel-in-progress: false
     steps:
       - uses: actions/checkout@v4
         with:
