@@ -1,0 +1,10 @@
+name: hackermon
+url: https://daniel.is-a.dev
+colors:
+  border: '#575757'
+  text: '#000000'
+  links: '#5539cc'
+stylesheets:
+  - https://fonts.googleapis.com/css2?family=Fira+Code&display=swap
+font_stack: "'Fira Code', monospace"
+font_size: 14px

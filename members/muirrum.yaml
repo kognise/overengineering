@@ -1,0 +1,8 @@
+name: muirrum
+url: https://devcara.com/
+colors:
+  border: '#ebdbb2'
+  text: '#ebdbb2'
+  links: '#b16286'
+font_stack: 'sans-serif'
+font_size: 1em
