@@ -7,25 +7,22 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-24.04
     environment: main
-    strategy:
-      max-parallel: 1
+    concurrency:
+      group: deploy-main
+      cancel-in-progress: true
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
-      - uses: actions-rs/toolchain@v1
-        with:
-          toolchain: stable
+      - uses: dtolnay/rust-toolchain@stable
 
-      - uses: Swatinem/rust-cache@v1
+      - uses: Swatinem/rust-cache@v2
         with:
-          sharedKey: overengineering
+          shared-key: overengineering
       
-      - uses: actions-rs/cargo@v1
-        with:
-          command: build
-          args: --release --all-features
+      - name: Build release
+        run: cargo build --release --all-features
 
       - uses: easingthemes/ssh-deploy@main
         env:
@@ -34,9 +31,9 @@ jobs:
           REMOTE_USER: ${{secrets.REMOTE_USER}}
           SOURCE: "target/release/overengineering"
 
-      - uses: garygrossgarten/github-action-ssh@release
+      - uses: appleboy/ssh-action@v1.0.3
         with:
-          command: /root/restart-overengineering.sh
           host: ${{secrets.REMOTE_HOST}}
           username: ${{secrets.REMOTE_USER}}
-          privateKey: ${{secrets.SERVER_SSH_KEY}}
+          key: ${{secrets.SERVER_SSH_KEY}}
+          script: /root/restart-overengineering.sh
