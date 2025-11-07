@@ -1,3 +1,6 @@
+use std::hash::{DefaultHasher, Hash, Hasher};
+
+use chrono::Utc;
 use rocket::tokio::fs::read_dir;
 use serde::{Deserialize, Serialize};
 
@@ -75,7 +78,11 @@ pub async fn read_members() -> anyhow::Result<Vec<Member>> {
         });
     }
 
-    members.sort_by(|a, b| a.slug.cmp(&b.slug));
+    members.sort_by_cached_key(|m| {
+        let mut h = DefaultHasher::new();
+        (&m.slug, Utc::now().date_naive()).hash(&mut h);
+        h.finish()
+    });
 
     Ok(members)
 }
