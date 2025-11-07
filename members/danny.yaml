@@ -1,0 +1,10 @@
+name: danny
+url: https://kdrag0n.dev/
+colors:
+  border: 'transparent'
+  text: '#f5f5f5'
+  links: '#f0abfc'
+stylesheets:
+  - https://kdrag0n.dev/css/ring1.css
+font_stack: '"Hubot Sans", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"'
+font_size: 1rem
