@@ -4,18 +4,20 @@ use lazy_static::lazy_static;
 use overengineering::config::Member;
 use overengineering::health::{Health, MemberManager};
 use rand::seq::SliceRandom;
+use rocket::http::Method;
 use rocket::request::{FromRequest, Outcome, Request};
-use rocket::response::content::Json;
-use rocket::response::{content::Html, Redirect};
+use rocket::response::content::{RawHtml, RawJson};
+use rocket::response::Redirect;
 use rocket::shield::Shield;
+use rocket_cors::{AllowedHeaders, AllowedOrigins, CorsOptions};
 use std::{convert::Infallible, future::Future, pin::Pin};
 
 lazy_static! {
     static ref MEMBER_MANAGER: MemberManager = MemberManager::new();
 }
 
-fn html(mut markup: String) -> Html<String> {
-    Html(
+fn html(mut markup: String) -> RawHtml<String> {
+    RawHtml(
         minify_html_onepass::in_place_str(
             &mut markup,
             &minify_html_onepass::Cfg {
@@ -48,7 +50,7 @@ impl<'r> FromRequest<'r> for LastSegment {
 }
 
 #[get("/")]
-async fn index() -> Html<String> {
+async fn index() -> RawHtml<String> {
     let mut ok_members: Vec<Member> = vec![];
     let mut not_ok_members: Vec<(Member, Option<Health>)> = vec![];
 
@@ -204,7 +206,7 @@ async fn embed(
     border_color: Option<String>,
     link_color: Option<String>,
     font_size: Option<String>,
-) -> Html<String> {
+) -> RawHtml<String> {
     // Healthy members, and this site!
     let members: Vec<Member> = MEMBER_MANAGER
         .members()
@@ -288,15 +290,26 @@ async fn embed(
 }
 
 #[get("/members.json")]
-async fn members() -> Json<String> {
-    Json(serde_json::to_string(&MEMBER_MANAGER.members().await).unwrap())
+async fn members() -> RawJson<String> {
+    RawJson(serde_json::to_string(&MEMBER_MANAGER.members().await).unwrap())
 }
 
 #[launch]
 async fn rocket() -> _ {
     let _ = MEMBER_MANAGER.members().await;
 
+    let cors = CorsOptions {
+        allowed_origins: AllowedOrigins::All,
+        allowed_methods: vec![Method::Get].into_iter().map(From::from).collect(),
+        allowed_headers: AllowedHeaders::All,
+        allow_credentials: false,
+        ..Default::default()
+    }
+    .to_cors()
+    .expect("couldn't create cors options");
+
     rocket::build()
         .attach(Shield::new())
         .mount("/", routes![index, random, embed, members])
+        .attach(cors)
 }
