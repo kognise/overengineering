@@ -65,7 +65,7 @@ async fn index() -> Html<String> {
             <html lang='en'>
                 <head>
                     <meta charset='utf-8'>
-                    <meta name='viewport' content='width=device-width'>
+                    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
                     <title>overengineeRING</title>
                     <style>
                         body {{
@@ -90,7 +90,9 @@ async fn index() -> Html<String> {
                         a {{ color: #ff6b60; }}
                         table {{
                             border-collapse: collapse;
-                            margin-left: 40px;
+                            overflow: auto;
+                            display: block;
+                            padding-left: 40px;
                         }}
                         th, td {{
                             padding: 5px 10px;
@@ -107,6 +109,9 @@ async fn index() -> Html<String> {
                         }}
                         ::marker {{ color: #4a6294; }}
                         ::selection {{ background: #9d1f15; color: #ffffff; }}
+                        @media (max-width: 500px) {{
+                            body {{ padding: 20px; }}
+                        }}
                     </style>
                 </head>
                 <body>
