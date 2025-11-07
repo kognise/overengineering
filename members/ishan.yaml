@@ -1,9 +1,10 @@
 name: ishan
-url: https://ishan.is-a.dev/
+url: https://quackduck.github.io/
 colors:
-  border: '#c9b697'
+  border: 'transparent'
   text: '#000000'
-  links: '#4d96c6'
+  links: '#0000ff'
 stylesheets:
-  - https://fonts.googleapis.com/css?family=Nunito&display=swap
-font_stack: Futura, Nunito, Verdana, sans-serif 
+  - https://cdn.jsdelivr.net/gh/bitmaks/cm-web-fonts@latest/fonts.css
+font_stack: '"Computer Modern Serif", serif'
+font_size: 120%
