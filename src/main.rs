@@ -96,7 +96,7 @@ async fn index() -> RawHtml<String> {
                             margin-top: 0;
                             margin-bottom: 20px;
                         }}
-                        p, ul {{ margin: 10px 0; }}
+                        p, ul, ol {{ margin: 10px 0; }}
                         a {{ color: #ff6b60; }}
                         .failures {{ font-size: 0.9em; opacity: 0.5; }}
                         table {{
@@ -137,7 +137,8 @@ async fn index() -> RawHtml<String> {
                         <p>everyone on this list has different skill levels and different personalities, but i guarantee you'll get something out of talking to them or looking at their sites.</p>
 
                         <h2>alive members</h2>
-                        <ul>{ok_member_list}</ul>
+                        <p>the ring order is randomized and changes daily! current ordering:</p>
+                        <ol>{ok_member_list}</ol>
 
                         <h2>criteria</h2>
                         <ul>
