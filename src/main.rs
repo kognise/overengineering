@@ -98,6 +98,7 @@ async fn index() -> RawHtml<String> {
                         }}
                         p, ul {{ margin: 10px 0; }}
                         a {{ color: #ff6b60; }}
+                        .failures {{ font-size: 0.9em; opacity: 0.5; }}
                         table {{
                             border-collapse: collapse;
                             overflow: auto;
@@ -148,21 +149,23 @@ async fn index() -> RawHtml<String> {
                         </ul>
                         <p>do you make things and have a website showcasing such things? you should join! email <a href='mailto:hi@kognise.dev' target='_blank' rel='noopener noreferrer'>hi@kognise.dev</a> asking politely, or directly <a href='https://github.com/kognise/overengineering/new/main?filename=members/your_name_here.yaml&value=%23%20make%20sure%20to%20change%20the%20filename%20to%20your_name%2Eyaml%20%28alphanumeric%20with%20underscores%29%0A%23%20and%20delete%20this%20comment%21%0A%23%0A%23%20excited%20to%20have%20you%20join%20overengineeRING%20%3A%29%0A%0Aname%3A%20your%20name%20here%0Aurl%3A%20https%3A%2F%2Fexample%2Ecom%2F%0A%0A%23%20%3D%3D%3D%3D%20optional%20settings%3A%20%3D%3D%3D%3D%0A%23%20colors%3A%0A%23%20%20%20border%3A%20%27%23000000%27%0A%23%20%20%20text%3A%20%27%23000000%27%0A%23%20%20%20links%3A%20%27%230000ee%27%0A%23%20stylesheets%3A%0A%23%20%20%20-%20https%3A%2F%2Ffonts%2Egoogleapis%2Ecom%2Fcss2%3Ffamily%3DIBM%2BPlex%2BMono%3Awght%40400%26display%3Dswap%0A%23%20font_stack%3A%20%27%22IBM%20Plex%20Mono%22%2C%20monospace%27%0A%23%20font_size%3A%201em' target='_blank' rel='noopener noreferrer'>create a pull request</a> adding your config file.
                         
-                        <h2>healthcheck failures</h2>
-                        <p>members who fail their healthchecks will not show up on webring member sites or the random button.</p>
-                        <p>(the plurality of dead members is partially caused by some serious downtime over the past couple of years. v2 fixes this!)</p>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>name</th>
-                                    <th>failure reason</th>
-                                    <th>url</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {not_ok_member_list}
-                            </tbody>
-                        </table>
+                        <div class='failures'>
+                            <h2>healthcheck failures</h2>
+                            <p>members who fail their healthchecks will not show up on webring member sites or the random button.</p>
+                            <p>(the plurality of dead members is partially caused by some serious downtime over the past couple of years. v2 fixes this!)</p>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>name</th>
+                                        <th>failure reason</th>
+                                        <th>url</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {not_ok_member_list}
+                                </tbody>
+                            </table>
+                        </div>
                     </main>
                 </body>
             </html>
