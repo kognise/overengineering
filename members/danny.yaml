@@ -1,12 +1,5 @@
-# make sure to change the filename to your_name.yaml (alphanumeric with underscores)
-# and delete this comment!
-#
-# excited to have you join overengineeRING :)
-
 name: danny
 url: https://kdrag0n.dev/
-
-# ==== optional settings: ====
 colors:
   border: 'transparent'
   text: '#f5f5f5'
