@@ -88,7 +88,14 @@ async fn index() -> RawHtml<String> {
                             display: block;
                         }}
                         h1 {{ margin: 0; }}
+                        main {{ max-width: 800px; margin: 0 auto; }}
                         h2 {{ margin: 0; margin-top: 30px; }}
+                        .banner {{
+                            font-size: 1.25rem;
+                            color: #60a5ff;
+                            margin-top: 0;
+                            margin-bottom: 20px;
+                        }}
                         p, ul {{ margin: 10px 0; }}
                         a {{ color: #ff6b60; }}
                         table {{
@@ -122,37 +129,41 @@ async fn index() -> RawHtml<String> {
                         <img src='https://raw.githubusercontent.com/kognise/overengineering/main/banner.png' alt='overengineeRING logo' title='overengineeRING' width='1200' height='200'>
                     </h1>
 
-                    <p>a <a href='https://en.wikipedia.org/wiki/Webring' target='_blank' rel='noopener noreferrer'>webring</a> of interesting people; makers of technology, music, art, or writing.</p>
-                    <p>everyone on this list has different skill levels and different personalities, but i guarantee you'll get something out of talking to them or looking at their sites.</p>
+                    <main>
+                        <p class='banner'>overengineeRING 2: now with healthchecks, cooler people, and seasonal themes!</p>
 
-                    <h2>alive members</h2>
-                    <ul>{ok_member_list}</ul>
+                        <p>a <a href='https://en.wikipedia.org/wiki/Webring' target='_blank' rel='noopener noreferrer'>webring</a> of interesting people; makers of technology, music, art, or writing. (<a href='https://github.com/kognise/overengineering/' target='_blank' rel='noopener noreferrer'>github</a>)</p>
+                        <p>everyone on this list has different skill levels and different personalities, but i guarantee you'll get something out of talking to them or looking at their sites.</p>
 
-                    <h2>criteria</h2>
-                    <ul>
-                        <li>this is a webring containing personal sites only.</li>
-                        <li>you should be an interesting person! a great gauge is whether you think people will get something out of visiting your website, whether inspiration or curiosity.</li>
-                        <li>no illegal, nsfw, or gory content is allowed. duh.</li>
-                        <li>members must embed the webring widget on the homepage of their site.</li>
-                        <li>don't be evil, unless you really have to.</li>
-                    </ul>
-                    <p>do you make things and have a website showcasing such things? you should join! email <a href='mailto:hi@kognise.dev' target='_blank' rel='noopener noreferrer'>hi@kognise.dev</a> asking politely, or directly <a href='https://github.com/kognise/overengineering/new/main?filename=members/your_name_here.yaml&value=%23%20make%20sure%20to%20change%20the%20filename%20to%20your_name%2Eyaml%20%28alphanumeric%20with%20underscores%29%0A%23%20and%20delete%20this%20comment%21%0A%23%0A%23%20excited%20to%20have%20you%20join%20overengineeRING%20%3A%29%0A%0Aname%3A%20your%20name%20here%0Aurl%3A%20https%3A%2F%2Fexample%2Ecom%2F%0A%0A%23%20%3D%3D%3D%3D%20optional%20settings%3A%20%3D%3D%3D%3D%0A%23%20colors%3A%0A%23%20%20%20border%3A%20%27%23000000%27%0A%23%20%20%20text%3A%20%27%23000000%27%0A%23%20%20%20links%3A%20%27%230000ee%27%0A%23%20stylesheets%3A%0A%23%20%20%20-%20https%3A%2F%2Ffonts%2Egoogleapis%2Ecom%2Fcss2%3Ffamily%3DIBM%2BPlex%2BMono%3Awght%40400%26display%3Dswap%0A%23%20font_stack%3A%20%27%22IBM%20Plex%20Mono%22%2C%20monospace%27%0A%23%20font_size%3A%201em' target='_blank' rel='noopener noreferrer'>create a pull request</a> adding your config file.
-                    
-                    <h2>healthcheck failures</h2>
-                    <p>members who fail their healthchecks will not show up on webring member sites or the random button.</p>
-                    <p>(fyi on the plurality of dead members, overengineeRING had some serious downtime for the past couple of years and kinda collapsed. now i'm bringing it back!)</p>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>name</th>
-                                <th>failure reason</th>
-                                <th>url</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {not_ok_member_list}
-                        </tbody>
-                    </table>
+                        <h2>alive members</h2>
+                        <ul>{ok_member_list}</ul>
+
+                        <h2>criteria</h2>
+                        <ul>
+                            <li>this is a webring containing personal sites only.</li>
+                            <li>you should be an interesting person! a great gauge is whether you think people will get something out of visiting your website, whether inspiration or curiosity.</li>
+                            <li>no illegal, nsfw, or gory content is allowed. duh.</li>
+                            <li>members must embed the webring widget on the homepage of their site.</li>
+                            <li>don't be evil, unless you really have to.</li>
+                        </ul>
+                        <p>do you make things and have a website showcasing such things? you should join! email <a href='mailto:hi@kognise.dev' target='_blank' rel='noopener noreferrer'>hi@kognise.dev</a> asking politely, or directly <a href='https://github.com/kognise/overengineering/new/main?filename=members/your_name_here.yaml&value=%23%20make%20sure%20to%20change%20the%20filename%20to%20your_name%2Eyaml%20%28alphanumeric%20with%20underscores%29%0A%23%20and%20delete%20this%20comment%21%0A%23%0A%23%20excited%20to%20have%20you%20join%20overengineeRING%20%3A%29%0A%0Aname%3A%20your%20name%20here%0Aurl%3A%20https%3A%2F%2Fexample%2Ecom%2F%0A%0A%23%20%3D%3D%3D%3D%20optional%20settings%3A%20%3D%3D%3D%3D%0A%23%20colors%3A%0A%23%20%20%20border%3A%20%27%23000000%27%0A%23%20%20%20text%3A%20%27%23000000%27%0A%23%20%20%20links%3A%20%27%230000ee%27%0A%23%20stylesheets%3A%0A%23%20%20%20-%20https%3A%2F%2Ffonts%2Egoogleapis%2Ecom%2Fcss2%3Ffamily%3DIBM%2BPlex%2BMono%3Awght%40400%26display%3Dswap%0A%23%20font_stack%3A%20%27%22IBM%20Plex%20Mono%22%2C%20monospace%27%0A%23%20font_size%3A%201em' target='_blank' rel='noopener noreferrer'>create a pull request</a> adding your config file.
+                        
+                        <h2>healthcheck failures</h2>
+                        <p>members who fail their healthchecks will not show up on webring member sites or the random button.</p>
+                        <p>(the plurality of dead members is partially caused by some serious downtime over the past couple of years. v2 fixes this!)</p>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>name</th>
+                                    <th>failure reason</th>
+                                    <th>url</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {not_ok_member_list}
+                            </tbody>
+                        </table>
+                    </main>
                 </body>
             </html>
         ",
