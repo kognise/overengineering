@@ -1,7 +1,7 @@
 use rocket::tokio::fs::read_dir;
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
-#[derive(Deserialize, Debug, Clone)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct MemberColors {
     pub text: String,
     pub border: String,
@@ -28,7 +28,7 @@ pub struct ParsedMember {
     pub stylesheets: Option<Vec<String>>,
 }
 
-#[derive(Debug, Clone)]
+#[derive(Serialize, Debug, Clone)]
 pub struct Member {
     pub slug: String,
     pub name: String,

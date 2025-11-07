@@ -6,6 +6,7 @@ use rocket::{
     futures::{stream, StreamExt},
     tokio::{spawn, sync::RwLock, task::JoinHandle, time::interval},
 };
+use serde::Serialize;
 
 use crate::config::{read_members, Member};
 
@@ -16,7 +17,7 @@ lazy_static! {
         .unwrap();
 }
 
-#[derive(Clone)]
+#[derive(Serialize, Clone)]
 pub enum Health {
     Ok,
     SiteUnreachable,

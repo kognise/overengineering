@@ -1565,6 +1565,7 @@ dependencies = [
  "reqwest",
  "rocket",
  "serde",
+ "serde_json",
  "serde_yaml",
 ]
 
@@ -2719,13 +2720,15 @@ dependencies = [
 
 [[package]]
 name = "serde_json"
-version = "1.0.74"
+version = "1.0.145"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ee2bb9cd061c5865d345bb02ca49fcef1391741b672b54a0bf7b679badec3142"
+checksum = "402a6f66d8c709116cf22f558eab210f5a50187f702eb4d7e5ef38d9a7f1c79c"
 dependencies = [
  "itoa 1.0.15",
+ "memchr",
  "ryu",
  "serde",
+ "serde_core",
 ]
 
 [[package]]

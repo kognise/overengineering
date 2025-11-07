@@ -5,6 +5,7 @@ use overengineering::config::Member;
 use overengineering::health::{Health, MemberManager};
 use rand::seq::SliceRandom;
 use rocket::request::{FromRequest, Outcome, Request};
+use rocket::response::content::Json;
 use rocket::response::{content::Html, Redirect};
 use rocket::shield::Shield;
 use std::{convert::Infallible, future::Future, pin::Pin};
@@ -286,11 +287,16 @@ async fn embed(
     ))
 }
 
+#[get("/members.json")]
+async fn members() -> Json<String> {
+    Json(serde_json::to_string(&MEMBER_MANAGER.members().await).unwrap())
+}
+
 #[launch]
 async fn rocket() -> _ {
     let _ = MEMBER_MANAGER.members().await;
 
     rocket::build()
         .attach(Shield::new())
-        .mount("/", routes![index, random, embed])
+        .mount("/", routes![index, random, embed, members])
 }
