@@ -1,0 +1,7 @@
+name: uli
+url: https://uli.rocks/
+colors:
+  border: 'transparent'
+  text: '#000000'
+  links: '#337ab3'
+font_stack: 'system-ui, sans-serif'
