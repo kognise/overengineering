@@ -98,6 +98,7 @@ async fn index() -> RawHtml<String> {
                         }}
                         p, ul, ol {{ margin: 10px 0; }}
                         a {{ color: #ff6b60; }}
+                        .dim {{ color: #4a6294; }}
                         .failures {{ font-size: 0.9em; opacity: 0.5; }}
                         table {{
                             border-collapse: collapse;
@@ -172,7 +173,11 @@ async fn index() -> RawHtml<String> {
             </html>
         ",
         ok_member_list = ok_members.into_iter()
-            .map(|member| format!("<li><a href='{}' target='_blank' rel='noopener noreferrer'>{}</a></li>", member.url, member.name))
+            .map(|member| format!("
+                <li>
+                    <div><a href='{url}' target='_blank' rel='noopener noreferrer'>{name}</a></div>
+                    <div class='dim'>{url}</div>
+                </li>", url = member.url, name = member.name))
             .collect::<Vec<String>>()
             .join(""),
         not_ok_member_list = not_ok_members.into_iter()
