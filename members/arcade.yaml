@@ -1,7 +1,0 @@
-name: arcade
-url: https://arcades.agency/
-colors:
-  border: '#268bd2'
-  text: '#002b36'
-  links: '#d33682'
-font_stack: serif

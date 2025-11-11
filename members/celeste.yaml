@@ -1,6 +1,0 @@
-name: celeste
-url: https://celeste.exposed/
-stylesheets: 
-  - https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap
-  - https://celeste.exposed/embed.css
-font_stack: '"Libre Baskerville", serif'
