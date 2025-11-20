@@ -6,3 +6,5 @@ colors:
   links: '#5EA651'
 font_stack: '"Inter", serif'
 font_size: 1em
+stylesheets:
+  - https://fonts.googleapis.com/css2?family=Inter&display=swap
