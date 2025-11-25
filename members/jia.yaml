@@ -1,17 +1,11 @@
-# make sure to change the filename to your_name.yaml (alphanumeric with underscores)
-# and delete this comment!
-#
-# excited to have you join overengineeRING :)
-
 name: jia chen
 url: https://www.jia.build/
-
-# ==== optional settings: ====
 colors:
-  border: '#000000'
-  text: '#ff9999'
-  links: '#0000ee'
-# stylesheets:
-#   - https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&display=swap
-# font_stack: '"IBM Plex Mono", monospace'
-# font_size: 1em
+  border: 'transparent'
+  text: '#ede8de'
+  links: '#ff9999'
+  on_links: '#000000'
+stylesheets:
+  - https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap
+font_stack: Playfair Display
+
