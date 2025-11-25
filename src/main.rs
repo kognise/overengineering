@@ -219,12 +219,13 @@ async fn random(last_segment: LastSegment) -> Redirect {
     )
 }
 
-#[get("/embed/<slug>?<text_color>&<border_color>&<link_color>&<font_size>")]
+#[get("/embed/<slug>?<text_color>&<border_color>&<link_color>&<on_link_color>&<font_size>")]
 async fn embed(
     slug: String,
     text_color: Option<String>,
     border_color: Option<String>,
     link_color: Option<String>,
+    on_link_color: Option<String>,
     font_size: Option<String>,
 ) -> RawHtml<String> {
     // Healthy members, and this site!
@@ -274,7 +275,7 @@ async fn embed(
                         nav {{ flex: 1; }}
                         div {{ display: flex; flex-direction: row; gap: 14px; justify-content: center; }}
                         a {{ display: inline-block; padding: 1px; color: {link_color}; text-decoration: none; }}
-                        a:hover {{ color: #ffffff; background: {link_color}; }}
+                        a:hover {{ color: {on_link_color}; background: {link_color}; }}
                         a::before {{ content: '['; }}
                         a::after {{ content: ']'; }}
                         p {{ margin: 0 0 10px 0; }}
@@ -306,6 +307,7 @@ async fn embed(
         text_color = text_color.as_ref().unwrap_or(&member.colors.text),
         border_color = border_color.as_ref().unwrap_or(&member.colors.border),
         link_color = link_color.as_ref().unwrap_or(&member.colors.links),
+        on_link_color = on_link_color.as_ref().unwrap_or(&member.colors.on_links),
     ))
 }
 

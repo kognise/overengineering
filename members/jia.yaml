@@ -1,0 +1,11 @@
+name: jia chen
+url: https://www.jia.build/
+colors:
+  border: 'transparent'
+  text: '#ede8de'
+  links: '#ff9999'
+  on_links: '#000000'
+stylesheets:
+  - https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap
+font_stack: Playfair Display
+

@@ -5,18 +5,36 @@ use rocket::tokio::fs::read_dir;
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
+pub struct ParsedMemberColors {
+    pub text: Option<String>,
+    pub border: Option<String>,
+    pub links: Option<String>,
+    pub on_links: Option<String>,
+}
+
+#[derive(Serialize, Debug, Clone)]
 pub struct MemberColors {
     pub text: String,
     pub border: String,
     pub links: String,
+    pub on_links: String,
 }
 
-impl Default for MemberColors {
-    fn default() -> Self {
+impl MemberColors {
+    pub fn fill_empty_from(from: Option<&ParsedMemberColors>) -> Self {
         Self {
-            border: "#000000".to_string(),
-            text: "#000000".to_string(),
-            links: "#0000ee".to_string(),
+            text: from
+                .and_then(|f| f.text.clone())
+                .unwrap_or("#000000".to_string()),
+            border: from
+                .and_then(|f| f.border.clone())
+                .unwrap_or("#000000".to_string()),
+            links: from
+                .and_then(|f| f.links.clone())
+                .unwrap_or("#0000ee".to_string()),
+            on_links: from
+                .and_then(|f| f.on_links.clone())
+                .unwrap_or("#ffffff".to_string()),
         }
     }
 }
@@ -25,7 +43,7 @@ impl Default for MemberColors {
 pub struct ParsedMember {
     pub name: String,
     pub url: String,
-    pub colors: Option<MemberColors>,
+    pub colors: Option<ParsedMemberColors>,
     pub font_stack: Option<String>,
     pub font_size: Option<String>,
     pub stylesheets: Option<Vec<String>>,
@@ -71,7 +89,7 @@ pub async fn read_members() -> anyhow::Result<Vec<Member>> {
             slug,
             name: member.name,
             url: member.url,
-            colors: member.colors.unwrap_or_default(),
+            colors: MemberColors::fill_empty_from(member.colors.as_ref()),
             font_stack: member.font_stack,
             font_size: member.font_size,
             stylesheets: member.stylesheets.unwrap_or_default(),
