@@ -1,0 +1,11 @@
+name: jasper
+url: https://jaspermayone.com
+colors:
+  border: '#f8fbf8'
+  text: '#151922'
+  links: '#56ba8e'
+  on_links: '#ffffff'
+stylesheets:
+  - https://jaspermayone.com/fonts/balgin.css
+font_stack: '"Balgin", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"'
+font_size: 1em
