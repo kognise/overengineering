@@ -1,0 +1,12 @@
+name: Kieran Klukas
+url: https://dunkirk.com/
+
+# ==== optional settings: ====
+colors:
+  border: '#9C86AA'
+  text: '#E1E0F0'
+  links: '#A2A1E7'
+# stylesheets:
+#   - https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&display=swap
+font_stack: 'ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas, "DejaVu Sans Mono", monospace'
+# font_size: 1em
