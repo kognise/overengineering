@@ -1,0 +1,11 @@
+name: jack  
+url: https://jkane-29.github.io
+colors:
+  border: '#ced4da'
+  text: '#000000'
+  links: '#6741d9'
+  on_links: '#ffffff'
+stylesheets:
+  - https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&display=swap
+font_stack: '"IBM Plex Mono", monospace'
+font_size: 1em
