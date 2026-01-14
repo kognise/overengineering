@@ -1,0 +1,9 @@
+name: Matt Handzel
+url: https://matthandzel.com/
+colors:
+  border: '#22B8CF'
+  text: '#E6EEF3'
+  links: '#6EE7F0'
+stylesheets:
+  - https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&display=swap
+font_stack: '"IBM Plex Mono", monospace'
