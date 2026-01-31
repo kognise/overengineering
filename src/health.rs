@@ -36,7 +36,8 @@ pub async fn check_health(url: &str, slug: &str) -> Health {
     };
 
     const URL_PREFIX: &str = "https://overengineering.kognise.dev/embed/";
-    let mut count = 0;
+    let mut correct_count = 0;
+    let mut incorrect_slugs: Vec<String> = vec![];
     for (offset, _) in body.match_indices(URL_PREFIX) {
         let offset = offset + URL_PREFIX.len();
 
@@ -49,14 +50,17 @@ pub async fn check_health(url: &str, slug: &str) -> Health {
         }
 
         if body_slug != slug {
-            return Health::SlugMismatch(body_slug);
+            incorrect_slugs.push(body_slug);
+        } else {
+            correct_count += 1;
         }
-
-        count += 1;
     }
 
-    if count == 0 {
-        Health::NoWebringEmbed
+    if correct_count == 0 {
+        match incorrect_slugs.pop() {
+            Some(slug) => Health::SlugMismatch(slug),
+            None => Health::NoWebringEmbed,
+        }
     } else {
         Health::Ok
     }
