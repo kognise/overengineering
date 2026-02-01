@@ -43,7 +43,7 @@ the link color should have good contrast with your website background and white.
 to embed the webring on your site, replace `<slug>` with the part of your config file name before `.yaml`:
 
 ```html
-<iframe src='https://overengineering.kognise.dev/embed/<slug>' title='overengineeRING embed' width='100%' height='100' style='user-select: none;' frameBorder='0'></iframe>
+<iframe src='https://overengineering.kognise.dev/embed/<slug>' title='overengineeRING embed' width='100%' height='100' style='user-select: none;' frameborder='0'></iframe>
 ```
 
 `text_color`, `border_color`, `link_color`, and `on_link_color` can be specified as query parameters and will override the colors specified in your config entry. colors in your config entry are optional and will, in turn, override the root defaults.
