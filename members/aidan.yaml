@@ -3,7 +3,8 @@ url: https://aidanjs.com/about/
 colors:
   border: '#FF7A27'
   text: '#FFFFFF'
-  links: '#5EA651'
+  links: '#00F41B'
+  on_links: '#000000'
 font_stack: '"Inter", serif'
 font_size: 1em
 stylesheets:
