@@ -1,0 +1,15 @@
+diff --git a/src/schema.rs b/src/schema.rs
+index 701117d..26f85a5 100644
+--- a/src/schema.rs
++++ b/src/schema.rs
+@@ -2,9 +2,9 @@
+ 
+ diesel::table! {
+     hits (id) {
+         id -> Integer,
+         ip_hash -> Binary,
+         slug -> Text,
+-        timestamp -> Integer,
++        timestamp -> TimestamptzSqlite,
+     }
+ }

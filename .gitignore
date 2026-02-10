@@ -1,1 +1,3 @@
 /target
+/stats.db
+migrations/.diesel_lock

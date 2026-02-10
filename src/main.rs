@@ -1,19 +1,29 @@
 #[macro_use]
 extern crate rocket;
+use chrono::Utc;
+use diesel::{Connection, RunQueryDsl, SqliteConnection};
 use lazy_static::lazy_static;
 use overengineering::config::Member;
 use overengineering::health::{Health, MemberManager};
+use overengineering::models::{Hit, NewHit, SiteStats};
+use overengineering::schema::hits;
 use rand::seq::SliceRandom;
 use rocket::http::Method;
 use rocket::request::{FromRequest, Outcome, Request};
-use rocket::response::content::{RawHtml, RawJson};
+use rocket::response::content::{RawHtml, RawJson, RawText};
 use rocket::response::Redirect;
 use rocket::shield::Shield;
+use rocket::tokio::sync::Mutex;
 use rocket_cors::{AllowedHeaders, AllowedOrigins, CorsOptions};
+use sha2::{Digest, Sha256};
+use std::net::{IpAddr, SocketAddr};
+use std::ops::DerefMut;
 use std::{convert::Infallible, future::Future, pin::Pin};
 
 lazy_static! {
     static ref MEMBER_MANAGER: MemberManager = MemberManager::new();
+    static ref DB: Mutex<SqliteConnection> =
+        Mutex::new(SqliteConnection::establish("./stats.db").unwrap());
 }
 
 fn html(mut markup: String) -> RawHtml<String> {
@@ -221,6 +231,7 @@ async fn random(last_segment: LastSegment) -> Redirect {
 
 #[get("/embed/<slug>?<text_color>&<border_color>&<link_color>&<on_link_color>&<font_size>")]
 async fn embed(
+    ip: IpAddr,
     slug: String,
     text_color: Option<String>,
     border_color: Option<String>,
@@ -247,6 +258,25 @@ async fn embed(
         .enumerate()
         .find(|(_, site)| site.slug == slug)
         .unwrap();
+
+    {
+        let ip_octets = match ip.to_canonical() {
+            IpAddr::V4(ip) => ip.octets().to_vec(),
+            IpAddr::V6(ip) => ip.octets().to_vec(),
+        };
+        let ip_hash = Sha256::digest(ip_octets);
+        let ip_hash = ip_hash.as_slice();
+        let new_hit = NewHit {
+            slug: &slug,
+            timestamp: Utc::now(),
+            ip_hash,
+        };
+        let mut db = DB.lock().await;
+        diesel::insert_into(hits::table)
+            .values(&new_hit)
+            .execute(&mut *db)
+            .unwrap();
+    }
 
     html(format!(
         "
@@ -311,6 +341,131 @@ async fn embed(
     ))
 }
 
+fn num_fmt(num: i32) -> String {
+    num.to_string()
+        .as_bytes()
+        .rchunks(3)
+        .rev()
+        .map(std::str::from_utf8)
+        .collect::<Result<Vec<&str>, _>>()
+        .unwrap()
+        .join(",")
+}
+
+#[get("/stats")]
+async fn stats() -> RawHtml<String> {
+    let members: Vec<Member> = MEMBER_MANAGER
+        .members()
+        .await
+        .into_iter()
+        .filter_map(|(member, health)| {
+            if matches!(health, Some(Health::Ok)) {
+                Some(member)
+            } else {
+                None
+            }
+        })
+        .collect();
+    let stats = {
+        let mut db = DB.lock().await;
+        SiteStats::fetch(&mut *db).unwrap()
+    };
+
+    html(format!(
+        "
+            <!DOCTYPE html>
+            <html lang='en'>
+                <head>
+                    <meta charset='utf-8'>
+                    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+                    <title>overengineeRING</title>
+                    <style>
+                        body {{
+                            background: #0b1728;
+                            color: #bdd2ff;
+                            font-family: ui-monospace, Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace;
+                            margin: 0;
+                            padding: 20px;
+                            line-height: 1.4;
+                            box-sizing: border-box;
+                            font-size: 0.8125rem;
+                        }}
+                        h1 {{ margin: 0; }}
+                        p {{ margin: 10px 0; }}
+                        a {{ color: #ff6b60; }}
+                        table {{
+                            border-collapse: collapse;
+                            overflow: auto;
+                            display: block;
+                        }}
+                        th, td {{
+                            padding: 5px 10px;
+                            text-align: left;
+                        }}
+                        td {{
+                            text-align: right;
+                        }}
+                        th:first-child, td:first-child {{
+                            padding-left: 0;
+                        }}
+                        thead {{
+                            border-bottom: 1px solid #4a6294;
+                        }}
+                        th:not(:last-child), td:not(:last-child) {{
+                            border-right: 1px solid #4a6294;
+                        }}
+                        ::selection {{ background: #9d1f15; color: #ffffff; }}
+                    </style>
+                </head>
+                <body>
+                    <h1>stats (beta)</h1>
+                    <p><a href='/'>go home</a></p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>slug</th>
+                                <th>visitors</th>
+                                <th>from others</th>
+                                <th>first site</th>
+                                <th>led to others</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {stats_list}
+                        </tbody>
+                    </table>
+                </body>
+            </html>
+        ",
+        stats_list = members
+            .into_iter()
+            .map(|member| {
+                let default = SiteStats::default_for_slug(&member.slug);
+                let stats = stats
+                    .iter()
+                    .find(|stats| stats.slug == member.slug)
+                    .unwrap_or_else(|| &default);
+
+                format!(
+                    "<tr>
+                        <th>{}</th>
+                        <td>{}</td>
+                        <td>{}</td>
+                        <td>{}</td>
+                        <td>{}</td>
+                    </tr>",
+                    member.slug,
+                    num_fmt(stats.total_unique_visitors),
+                    num_fmt(stats.returning_users),
+                    num_fmt(stats.first_visit_users),
+                    num_fmt(stats.driven_to_others),
+                )
+            })
+            .collect::<Vec<String>>()
+            .join("")
+    ))
+}
+
 #[get("/members.json")]
 async fn members() -> RawJson<String> {
     RawJson(serde_json::to_string(&MEMBER_MANAGER.members().await).unwrap())
@@ -332,6 +487,6 @@ async fn rocket() -> _ {
 
     rocket::build()
         .attach(Shield::new())
-        .mount("/", routes![index, random, embed, members])
+        .mount("/", routes![index, random, embed, members, stats])
         .attach(cors)
 }
