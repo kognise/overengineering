@@ -72,6 +72,12 @@ pub struct MemberManager {
     interval_handle: JoinHandle<()>,
 }
 
+impl Default for MemberManager {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl MemberManager {
     pub fn new() -> Self {
         let members = Arc::new(RwLock::new(vec![]));

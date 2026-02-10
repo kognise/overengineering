@@ -5,19 +5,18 @@ use diesel::{Connection, RunQueryDsl, SqliteConnection};
 use lazy_static::lazy_static;
 use overengineering::config::Member;
 use overengineering::health::{Health, MemberManager};
-use overengineering::models::{Hit, NewHit, SiteStats};
+use overengineering::models::{NewHit, SiteStats};
 use overengineering::schema::hits;
 use rand::seq::SliceRandom;
 use rocket::http::Method;
 use rocket::request::{FromRequest, Outcome, Request};
-use rocket::response::content::{RawHtml, RawJson, RawText};
+use rocket::response::content::{RawHtml, RawJson};
 use rocket::response::Redirect;
 use rocket::shield::Shield;
 use rocket::tokio::sync::Mutex;
 use rocket_cors::{AllowedHeaders, AllowedOrigins, CorsOptions};
 use sha2::{Digest, Sha256};
-use std::net::{IpAddr, SocketAddr};
-use std::ops::DerefMut;
+use std::net::IpAddr;
 use std::{convert::Infallible, future::Future, pin::Pin};
 
 lazy_static! {
@@ -368,7 +367,7 @@ async fn stats() -> RawHtml<String> {
         .collect();
     let stats = {
         let mut db = DB.lock().await;
-        SiteStats::fetch(&mut *db).unwrap()
+        SiteStats::fetch(&mut db).unwrap()
     };
 
     html(format!(
@@ -444,7 +443,7 @@ async fn stats() -> RawHtml<String> {
                 let stats = stats
                     .iter()
                     .find(|stats| stats.slug == member.slug)
-                    .unwrap_or_else(|| &default);
+                    .unwrap_or(&default);
 
                 format!(
                     "<tr>

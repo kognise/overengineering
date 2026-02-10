@@ -2,7 +2,7 @@ use chrono::{DateTime, Utc};
 use diesel::{
     sql_query,
     sql_types::{Integer, Text},
-    FromSqlRow, Insertable, Queryable, QueryableByName, RunQueryDsl, Selectable, SqliteConnection,
+    Insertable, Queryable, QueryableByName, RunQueryDsl, Selectable, SqliteConnection,
 };
 
 #[derive(Queryable, Selectable, Clone, Debug)]
