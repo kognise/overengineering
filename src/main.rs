@@ -231,12 +231,12 @@ async fn random(last_segment: LastSegment) -> Redirect {
 #[get("/embed/<slug>?<text_color>&<border_color>&<link_color>&<on_link_color>&<font_size>")]
 async fn embed(
     ip: IpAddr,
-    slug: String,
-    text_color: Option<String>,
-    border_color: Option<String>,
-    link_color: Option<String>,
-    on_link_color: Option<String>,
-    font_size: Option<String>,
+    slug: &str,
+    text_color: Option<&str>,
+    border_color: Option<&str>,
+    link_color: Option<&str>,
+    on_link_color: Option<&str>,
+    font_size: Option<&str>,
 ) -> RawHtml<String> {
     // Healthy members, and this site!
     let members: Vec<Member> = MEMBER_MANAGER
@@ -331,15 +331,15 @@ async fn embed(
         prev_url = members[if member_index == 0 { members.len() - 1 } else { member_index - 1 }].url,
         next_url = members[(member_index + 1) % members.len()].url,
         font_stack = member.font_stack.as_ref().unwrap_or(&"monospace".to_string()),
-        font_size = font_size.as_ref().unwrap_or(member.font_size.as_ref().unwrap_or(&"initial".to_string())),
+        font_size = font_size.unwrap_or(member.font_size.as_ref().unwrap_or(&"initial".to_string())),
         head_include = member.stylesheets.iter()
             .map(|stylesheet| format!("<link rel='stylesheet' href='{}'>", stylesheet))
             .collect::<Vec<String>>()
             .join(""),
-        text_color = text_color.as_ref().unwrap_or(&member.colors.text),
-        border_color = border_color.as_ref().unwrap_or(&member.colors.border),
-        link_color = link_color.as_ref().unwrap_or(&member.colors.links),
-        on_link_color = on_link_color.as_ref().unwrap_or(&member.colors.on_links),
+        text_color = text_color.as_ref().unwrap_or(&member.colors.text.as_str()),
+        border_color = border_color.as_ref().unwrap_or(&member.colors.border.as_str()),
+        link_color = link_color.as_ref().unwrap_or(&member.colors.links.as_str()),
+        on_link_color = on_link_color.as_ref().unwrap_or(&member.colors.on_links.as_str()),
         theme_js = get_theme_js(),
     ))
 }
