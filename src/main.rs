@@ -1,6 +1,6 @@
 #[macro_use]
 extern crate rocket;
-use chrono::Utc;
+use chrono::{Datelike, Duration, Local, Utc};
 use diesel::{Connection, RunQueryDsl, SqliteConnection};
 use lazy_static::lazy_static;
 use overengineering::config::Member;
@@ -321,6 +321,9 @@ async fn embed(
                         </div>
                     </nav>
                     <a href='{next_url}' target='_parent'>next &raquo;</a>
+                    <script>
+                        {theme_js}
+                    </script>
                 </body>
             </html>
         ",
@@ -337,7 +340,19 @@ async fn embed(
         border_color = border_color.as_ref().unwrap_or(&member.colors.border),
         link_color = link_color.as_ref().unwrap_or(&member.colors.links),
         on_link_color = on_link_color.as_ref().unwrap_or(&member.colors.on_links),
+        theme_js = get_theme_js(),
     ))
+}
+
+fn get_theme_js() -> &'static str {
+    let pacific_time_ish = Local::now() - Duration::hours(8);
+    let month = pacific_time_ish.month();
+    let day = pacific_time_ish.day();
+
+    match (month, day) {
+        (2, 14) => include_str!("seasonal/valentines.js"),
+        _ => "",
+    }
 }
 
 fn num_fmt(num: i32) -> String {
