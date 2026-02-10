@@ -426,7 +426,7 @@ async fn stats() -> RawHtml<String> {
                                 <th>visitors</th>
                                 <th>from others</th>
                                 <th>first site</th>
-                                <th>led to others</th>
+                                <th>-> others</th>
                             </tr>
                         </thead>
                         <tbody>
