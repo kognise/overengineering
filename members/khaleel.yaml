@@ -1,0 +1,10 @@
+name: khaleel
+url: https://khaleelgibran.com/
+colors:
+  border: '#94a3b840'
+  text: '#000000'
+  links: '#0000ee'
+# stylesheets:
+#   - https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&display=swap
+# font_stack: '"IBM Plex Mono", monospace'
+# font_size: 1em
