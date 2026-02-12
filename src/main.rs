@@ -385,6 +385,19 @@ async fn stats() -> RawHtml<String> {
         SiteStats::fetch(&mut db).unwrap()
     };
 
+    let mut visitors_sum = 0;
+    let mut from_others_sum = 0;
+    for member in &members {
+        let default = SiteStats::default_for_slug(&member.slug);
+        let stats = stats
+            .iter()
+            .find(|stats| stats.slug == member.slug)
+            .unwrap_or(&default);
+
+        visitors_sum += stats.total_unique_visitors;
+        from_others_sum += stats.returning_users;
+    }
+
     html(format!(
         "
             <!DOCTYPE html>
@@ -434,6 +447,7 @@ async fn stats() -> RawHtml<String> {
                 <body>
                     <h1>stats (beta)</h1>
                     <p><a href='/'>go home</a></p>
+                    <p>overengineeRING drove {driven_pct}% of the new visitors to members' websites!</p>
                     <table>
                         <thead>
                             <tr>
@@ -476,7 +490,8 @@ async fn stats() -> RawHtml<String> {
                 )
             })
             .collect::<Vec<String>>()
-            .join("")
+            .join(""),
+        driven_pct = ((from_others_sum as f32 / visitors_sum as f32) * 100.0).round() as u32,
     ))
 }
 
