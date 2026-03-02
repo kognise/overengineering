@@ -1,0 +1,9 @@
+name: claire
+url: https://www.clairebookworm.com/
+colors:
+  border: "transparent"
+  text: "#ffffff"
+  links: "#ffffffad"
+  on_links: "#000000"
+font_size: 1rem
+font_stack: "system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji"
