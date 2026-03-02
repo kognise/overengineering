@@ -41,6 +41,7 @@ impl MemberColors {
 
 #[derive(Deserialize, Debug, Clone)]
 pub struct ParsedMember {
+    pub is_being_removed: Option<bool>,
     pub name: String,
     pub url: String,
     pub colors: Option<ParsedMemberColors>,
@@ -51,6 +52,7 @@ pub struct ParsedMember {
 
 #[derive(Serialize, Debug, Clone)]
 pub struct Member {
+    pub is_being_removed: bool,
     pub slug: String,
     pub name: String,
     pub url: String,
@@ -86,6 +88,7 @@ pub async fn read_members() -> anyhow::Result<Vec<Member>> {
             .unwrap()
             .to_string();
         members.push(Member {
+            is_being_removed: member.is_being_removed.unwrap_or(false),
             slug,
             name: member.name,
             url: member.url,

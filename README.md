@@ -55,3 +55,4 @@ to embed the webring on your site, replace `<slug>` with the part of your config
 - members must embed the webring widget on the main page of their site.
 - no illegal, nsfw, or gory content is allowed. duh.
 - don't be evil, unless you really have to.
+- if you're part of multiple webrings, this should be the most prominent. (i know some other webrings don't do this but people find it really confusing otherwise, sorry :<)

@@ -64,6 +64,10 @@ async fn index() -> RawHtml<String> {
     let mut not_ok_members: Vec<(Member, Option<Health>)> = vec![];
 
     for (member, health) in MEMBER_MANAGER.members().await {
+        if member.is_being_removed {
+            continue;
+        }
+
         if matches!(health, Some(Health::Ok)) {
             ok_members.push(member);
         } else {
@@ -157,6 +161,7 @@ async fn index() -> RawHtml<String> {
                             <li>no illegal, nsfw, or gory content is allowed. duh.</li>
                             <li>members must embed the webring widget on the homepage of their site.</li>
                             <li>don't be evil, unless you really have to.</li>
+                            <li>if you're part of multiple webrings, this should be the most prominent. (i know some other webrings don't do this but people find it really confusing otherwise, sorry :<)</li>
                         </ul>
                         <p>do you make things and have a website showcasing such things? you should join! email <a href='mailto:hi@kognise.dev' target='_blank' rel='noopener noreferrer'>hi@kognise.dev</a> asking politely, or directly <a href='https://github.com/kognise/overengineering/new/main?filename=members/your_name_here.yaml&value=%23%20make%20sure%20to%20change%20the%20filename%20to%20your%5Fname%2Eyaml%20%28alphanumeric%20with%20underscores%29%0A%23%20and%20delete%20the%20comments%21%0A%23%0A%23%20excited%20to%20have%20you%20join%20overengineeRING%20%3A%29%0A%0Aname%3A%20your%20name%20here%0Aurl%3A%20https%3A%2F%2Fexample%2Ecom%2F%0A%0A%23%20%3D%3D%3D%3D%20optional%20settings%3A%20%3D%3D%3D%3D%0A%23%20colors%3A%0A%23%20%20%20border%3A%20%27%23000000%27%0A%23%20%20%20text%3A%20%27%23000000%27%0A%23%20%20%20links%3A%20%27%230000ee%27%0A%23%20%20%20on%5Flinks%3A%20%27%23ffffff%27%0A%23%20stylesheets%3A%0A%23%20%20%20%2D%20https%3A%2F%2Ffonts%2Egoogleapis%2Ecom%2Fcss2%3Ffamily%3DIBM%2BPlex%2BMono%3Awght%40400%26display%3Dswap%0A%23%20font%5Fstack%3A%20%27%22IBM%20Plex%20Mono%22%2C%20monospace%27%0A%23%20font%5Fsize%3A%201%2E2em' target='_blank' rel='noopener noreferrer'>create a pull request</a> adding your config file.
                         
@@ -215,7 +220,10 @@ async fn random(last_segment: LastSegment) -> Redirect {
             .await
             .into_iter()
             .filter_map(|(member, health)| {
-                if matches!(health, Some(Health::Ok)) && last_segment.0 != Some(member.slug) {
+                if matches!(health, Some(Health::Ok))
+                    && last_segment.0 != Some(member.slug)
+                    && !member.is_being_removed
+                {
                     Some(member.url)
                 } else {
                     None
@@ -244,7 +252,9 @@ async fn embed(
         .await
         .into_iter()
         .filter_map(|(member, health)| {
-            if matches!(health, Some(Health::Ok)) || member.slug == slug {
+            if (matches!(health, Some(Health::Ok)) && !member.is_being_removed)
+                || member.slug == slug
+            {
                 Some(member)
             } else {
                 None
@@ -373,7 +383,7 @@ async fn stats() -> RawHtml<String> {
         .await
         .into_iter()
         .filter_map(|(member, health)| {
-            if matches!(health, Some(Health::Ok)) {
+            if matches!(health, Some(Health::Ok)) && !member.is_being_removed {
                 Some(member)
             } else {
                 None
