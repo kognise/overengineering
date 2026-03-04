@@ -8,7 +8,7 @@ use overengineering::health::{Health, MemberManager};
 use overengineering::models::{NewHit, SiteStats};
 use overengineering::schema::hits;
 use rand::seq::SliceRandom;
-use rocket::http::Method;
+use rocket::http::{Method, Status};
 use rocket::request::{FromRequest, Outcome, Request};
 use rocket::response::content::{RawHtml, RawJson};
 use rocket::response::Redirect;
@@ -245,7 +245,7 @@ async fn embed(
     link_color: Option<&str>,
     on_link_color: Option<&str>,
     font_size: Option<&str>,
-) -> RawHtml<String> {
+) -> Result<RawHtml<String>, Status> {
     // Healthy members, and this site!
     let members: Vec<Member> = MEMBER_MANAGER
         .members()
@@ -262,11 +262,16 @@ async fn embed(
         })
         .collect();
 
-    let (member_index, member) = members
+    let (member_index, member) = match members
         .iter()
         .enumerate()
         .find(|(_, site)| site.slug == slug)
-        .unwrap();
+    {
+        Some((idx, m)) => (idx, m),
+        None => {
+            return Err(Status::NotFound);
+        }
+    };
 
     {
         let ip_octets = match ip.to_canonical() {
@@ -287,7 +292,7 @@ async fn embed(
             .unwrap();
     }
 
-    html(format!(
+    let html = format!(
         "
             <!DOCTYPE html>
             <html lang='en'>
@@ -351,7 +356,8 @@ async fn embed(
         link_color = link_color.as_ref().unwrap_or(&member.colors.links.as_str()),
         on_link_color = on_link_color.as_ref().unwrap_or(&member.colors.on_links.as_str()),
         theme_js = get_theme_js(),
-    ))
+    );
+    Ok(RawHtml(html))
 }
 
 fn get_theme_js() -> &'static str {
