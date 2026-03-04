@@ -8,6 +8,5 @@ colors:
 font_size: 1.15rem
 stylesheets:
   - https://www.karanjanthe.me/assets/ring.css
-font_size: 1.15rem
 font_stack: 'et-book, Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif'
 
