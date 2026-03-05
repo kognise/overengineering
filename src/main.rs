@@ -356,8 +356,8 @@ async fn embed(
         link_color = link_color.as_ref().unwrap_or(&member.colors.links.as_str()),
         on_link_color = on_link_color.as_ref().unwrap_or(&member.colors.on_links.as_str()),
         theme_js = get_theme_js(),
-    );
-    Ok(RawHtml(html))
+    ));
+    Ok(html)
 }
 
 fn get_theme_js() -> &'static str {
