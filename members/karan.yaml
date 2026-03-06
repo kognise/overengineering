@@ -1,8 +1,12 @@
 name: karan
 url: https://karanjanthe.me/
 colors:
-  border: '#ccb58e'
+  border: 'transparent'
   text: '#111111'
   links: '#a00000'
   on_links: '#ffffff'
-font_stack: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif'
+font_size: 1.15rem
+stylesheets:
+  - https://www.karanjanthe.me/assets/ring.css
+font_stack: 'et-book, Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif'
+
