@@ -1,0 +1,10 @@
+name: warren
+url: https://www.wyun.sh/
+colors:
+  border: '#282828'
+  text: '#EBDBB2'
+  links: '#8EC07C;'
+stylesheets:
+  - https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&display=swap
+font_stack: '"IBM Plex Mono", monospace'
+font_size: 1em
