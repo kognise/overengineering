@@ -1,0 +1,10 @@
+name: sachit
+url: https://sachitrame.sh
+colors:
+  border: '#333333'
+  text: '#e0e0e0'
+  links: '#66b3ff'
+  on_links: '#0e0e0e'
+stylesheets:
+  - https://fonts.googleapis.com/css2?family=Space+Mono:wght@400&display=swap
+font_stack: '"Space Mono", monospace'
