@@ -1,0 +1,8 @@
+name: kingzee
+url: https://cynical.me/
+colors:
+  border: 'transparent'
+  text: '#ffffff'
+  links: '#0426fd'
+stylesheets:
+  - https://themathjester.com/lab/colors.css
