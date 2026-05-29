@@ -10,4 +10,4 @@ font_size: 1em
 stylesheets:
   - https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap
 font_stack: '"IBM Plex Mono", "Courier New", monospace'
-font_size: 12px
+font_size: 11px
