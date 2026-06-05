@@ -1,0 +1,11 @@
+name: arjun
+url: https://arjunridesa.bike/
+colors:
+  border: '#DED4C7'
+  text: '#211D18'
+  links: '#DD5D2A'
+  on_links: '#F7F3EC'
+font_stack: '"Playfair Display", Georgia, serif'
+font_size: 1em
+stylesheets:
+  - https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&display=swap
