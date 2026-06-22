@@ -1,0 +1,10 @@
+name: harrison
+url: https://harrisonqian.com/
+colors:
+  border: '#ffffff2e'
+  text: '#ffffff'
+  links: '#4da6ff'
+  on_links: '#000000'
+stylesheets:
+  - https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400&display=swap
+font_stack: '"Geist Mono", monospace'
