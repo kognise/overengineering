@@ -1,0 +1,11 @@
+name: teddy
+url: https://www.teddytennant.com/
+colors:
+  border: '#262622'
+  text: '#EDEBE3'
+  links: '#EDEBE3'
+  on_links: '#0A0A09'
+stylesheets:
+  - https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=swap
+font_stack: '"JetBrains Mono", ui-monospace, monospace'
+font_size: 1em
