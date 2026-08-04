@@ -2,8 +2,10 @@ name: claire
 url: https://www.clairebookworm.com/
 colors:
   border: 'transparent'
-  text: '#ffffff'
-  links: '#ffffff'
-  on_links: '#000000'
-font_size: 1rem
-font_stack: 'system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji'
+  text: '#8ff6ff'
+  links: '#ff9de2'
+  on_links: '#160a2e'
+stylesheets:
+  - https://fonts.googleapis.com/css2?family=VT323&display=swap
+font_stack: '"VT323", ui-monospace, SFMono-Regular, Menlo, monospace'
+font_size: 1.35rem
