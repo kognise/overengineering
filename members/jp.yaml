@@ -1,0 +1,11 @@
+name: jp
+url: https://japroz.me
+colors:
+  border: 'slategrey'
+  text: 'slategray'
+  links: '#2d6cdf'
+  on_links: '#2d6cdf'
+stylesheets:
+  - https://fonts.cdnfonts.com/css/menlo
+font_stack: '"Menlo", monospace'
+font_size: 1em
