@@ -1,0 +1,8 @@
+name: mat
+url: https://matmanna.dev/
+colors:
+  border: '#d6d3d1'
+  text: '#292524'
+  links: '#57534e'
+  on_links: '#ffffff'
+font_stack: 'ui-monospace, SFMono-Regular, Menlo, monospace'
