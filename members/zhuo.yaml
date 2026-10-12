@@ -1,0 +1,6 @@
+name: zhuo
+url: https://zhuojiayanstudio.github.io/
+stylesheets:
+  - https://cdn.jsdelivr.net/npm/water.css@2/out/dark.css
+font_stack: 'monospace, monospace'
+font_size: 1em
