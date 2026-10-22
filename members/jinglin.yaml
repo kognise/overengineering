@@ -1,0 +1,10 @@
+name: jinglin
+url: https://www.jinglinl.com/
+colors:
+  border: '#003310'
+  text: '#1a1a1a'
+  links: '#003310'
+  on_links: '#c7ef4e'
+stylesheets:
+  - https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500&display=swap
+font_stack: '"Hanken Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif'
